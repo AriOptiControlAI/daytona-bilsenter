@@ -85,7 +85,7 @@
       backdrop-filter: blur(20px);
       padding: .75rem 2rem;
     }
-    .nav-logo img { height: 70px; width: auto; display: block; }
+    .nav-logo img { height: 96px; width: auto; display: block; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-size: .85rem; font-weight: 600; color: var(--muted);
@@ -892,7 +892,324 @@
   </div>
 </footer>
 
+<!-- ══ CHAT WIDGET ══════════════════════════════════════════ -->
+<style>
+  /* ── Chat button ── */
+  #chat-btn {
+    position: fixed; bottom: 1.75rem; right: 1.75rem; z-index: 200;
+    width: 58px; height: 58px; border-radius: 50%;
+    background: var(--red); color: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 24px rgba(220,38,38,.45);
+    transition: transform .2s, box-shadow .2s, background .2s;
+  }
+  #chat-btn:hover { background: var(--red-h); transform: scale(1.08); box-shadow: 0 6px 32px rgba(220,38,38,.55); }
+  #chat-btn svg { width: 26px; height: 26px; transition: opacity .2s; }
+  #chat-btn .ico-chat { opacity: 1; position: absolute; }
+  #chat-btn .ico-close { opacity: 0; position: absolute; }
+  #chat-btn.open .ico-chat { opacity: 0; }
+  #chat-btn.open .ico-close { opacity: 1; }
+  .chat-notif {
+    position: absolute; top: -4px; right: -4px; width: 18px; height: 18px;
+    background: #FBBF24; border-radius: 50%; border: 2px solid var(--bg);
+    font-size: .62rem; font-weight: 800; color: #000;
+    display: flex; align-items: center; justify-content: center;
+    animation: bounce-notif 2s ease infinite;
+  }
+  @keyframes bounce-notif { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+
+  /* ── Chat window ── */
+  #chat-window {
+    position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 199;
+    width: 360px; max-width: calc(100vw - 2rem);
+    background: #0D0F15; border: 1px solid rgba(255,255,255,.1);
+    border-radius: 20px; overflow: hidden;
+    box-shadow: 0 24px 60px rgba(0,0,0,.6), 0 0 0 1px rgba(220,38,38,.1);
+    display: none; flex-direction: column;
+    transform: translateY(12px) scale(.97); opacity: 0;
+    transition: transform .25s ease, opacity .25s ease;
+    max-height: 520px;
+  }
+  #chat-window.open { display: flex; }
+  #chat-window.visible { transform: none; opacity: 1; }
+
+  .cw-head {
+    background: var(--red); padding: 1.1rem 1.25rem;
+    display: flex; align-items: center; gap: .85rem; flex-shrink: 0;
+  }
+  .cw-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .cw-head-info { flex: 1; }
+  .cw-head-name { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: .92rem; color: #fff; }
+  .cw-head-status { font-size: .72rem; color: rgba(255,255,255,.75); display: flex; align-items: center; gap: .3rem; }
+  .cw-head-status::before { content:''; width:7px; height:7px; border-radius:50%; background:#4ADE80; flex-shrink:0; }
+
+  .cw-messages {
+    flex: 1; overflow-y: auto; padding: 1.1rem; display: flex; flex-direction: column; gap: .75rem;
+    scroll-behavior: smooth;
+  }
+  .cw-messages::-webkit-scrollbar { width: 4px; }
+  .cw-messages::-webkit-scrollbar-track { background: transparent; }
+  .cw-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,.1); border-radius: 4px; }
+
+  .msg { display: flex; gap: .5rem; align-items: flex-end; max-width: 88%; }
+  .msg.bot { align-self: flex-start; }
+  .msg.user { align-self: flex-end; flex-direction: row-reverse; }
+  .msg-bubble {
+    padding: .65rem .9rem; border-radius: 14px; font-size: .83rem; line-height: 1.55;
+  }
+  .msg.bot .msg-bubble {
+    background: rgba(255,255,255,.07); color: var(--text); border-radius: 14px 14px 14px 4px;
+  }
+  .msg.user .msg-bubble {
+    background: var(--red); color: #fff; border-radius: 14px 14px 4px 14px;
+  }
+  .msg-avatar { width: 26px; height: 26px; border-radius: 50%; background: var(--red); display:flex;align-items:center;justify-content:center;font-size:.75rem;flex-shrink:0; }
+
+  /* Quick replies */
+  .cw-quick { padding: .6rem 1rem 0; display: flex; flex-wrap: wrap; gap: .45rem; }
+  .qr-btn {
+    background: rgba(220,38,38,.1); border: 1px solid rgba(220,38,38,.3);
+    color: var(--red); font-size: .75rem; font-weight: 600; padding: .4rem .8rem;
+    border-radius: 999px; cursor: pointer; transition: background .2s, border-color .2s;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .qr-btn:hover { background: rgba(220,38,38,.2); border-color: var(--red); }
+
+  /* Input bar */
+  .cw-input-bar {
+    padding: .85rem 1rem; border-top: 1px solid rgba(255,255,255,.07);
+    display: flex; gap: .6rem; align-items: center; flex-shrink: 0;
+  }
+  .cw-input {
+    flex: 1; background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 10px; padding: .6rem .9rem; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: .83rem; outline: none;
+    transition: border-color .2s;
+  }
+  .cw-input:focus { border-color: rgba(220,38,38,.4); }
+  .cw-input::placeholder { color: rgba(139,142,158,.5); }
+  .cw-send {
+    width: 36px; height: 36px; border-radius: 9px; background: var(--red); border: none;
+    cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: background .2s, transform .15s; flex-shrink: 0;
+  }
+  .cw-send:hover { background: var(--red-h); transform: scale(1.06); }
+  .cw-send svg { width: 15px; height: 15px; stroke: #fff; }
+
+  /* Typing indicator */
+  .typing-dots { display: flex; gap: 4px; align-items: center; padding: .2rem 0; }
+  .typing-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted); display: block; }
+  .typing-dots span:nth-child(1) { animation: td .9s .0s ease infinite; }
+  .typing-dots span:nth-child(2) { animation: td .9s .15s ease infinite; }
+  .typing-dots span:nth-child(3) { animation: td .9s .30s ease infinite; }
+  @keyframes td { 0%,80%,100%{transform:scale(1);opacity:.4} 40%{transform:scale(1.3);opacity:1} }
+
+  @media(max-width:420px) {
+    #chat-window { right: .75rem; bottom: 5rem; width: calc(100vw - 1.5rem); }
+    #chat-btn { bottom: 1.25rem; right: 1.25rem; }
+  }
+</style>
+
+<!-- Chat button -->
+<button id="chat-btn" onclick="toggleChat()" aria-label="Åpne chat">
+  <span class="chat-notif">1</span>
+  <svg class="ico-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+  <svg class="ico-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+</button>
+
+<!-- Chat window -->
+<div id="chat-window">
+  <div class="cw-head">
+    <div class="cw-avatar">🚗</div>
+    <div class="cw-head-info">
+      <div class="cw-head-name">Daytona Assistent</div>
+      <div class="cw-head-status">Tilgjengelig nå</div>
+    </div>
+  </div>
+  <div class="cw-messages" id="cwMessages"></div>
+  <div class="cw-quick" id="cwQuick"></div>
+  <div class="cw-input-bar">
+    <input class="cw-input" id="cwInput" placeholder="Skriv en melding…" onkeydown="if(event.key==='Enter')sendUserMsg()" />
+    <button class="cw-send" onclick="sendUserMsg()">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/></svg>
+    </button>
+  </div>
+</div>
+
 <script>
+  /* ── Chat widget ── */
+  const RESPONSES = {
+    kjøpe: {
+      text: '🚗 Vi har et utvalg av kvalitetssikrede biler klare for deg! Se alle tilgjengelige biler på vår FINN.no-side — oppdatert fortløpende.',
+      links: [{label:'Se biler på FINN.no →', url:'https://www.finn.no/mobility/dealer/8854664/daytona-bilsenter-as'}],
+      quick: ['Pris og finansiering', 'Garanti', 'Ring oss']
+    },
+    selge: {
+      text: '💰 Vi kjøper biler direkte — ingen mellommann og ingen ventetid. Prosessen er enkel:\n\n1️⃣ Gi oss reg.nr. og kilometerstand\n2️⃣ Du får et konkret tilbud innen 24 timer\n3️⃣ Penger på konto innen få dager',
+      links: [{label:'Kontakt oss for tilbud →', url:'#kontakt'}],
+      quick: ['Hva er bilen min verdt?', 'Kommisjonssalg', 'Ring oss']
+    },
+    kommisjon: {
+      text: '📋 Med kommisjonssalg tar vi oss av alt — visninger, kontrakter og betaling. Du setter prisen, vi tar en fast kommisjon. Bilen kan stå hos oss eller du beholder den inntil salg.',
+      links: [{label:'Les mer om kommisjonssalg →', url:'#tjenester'}],
+      quick: ['Selg bil', 'Kontakt oss', 'Ring oss']
+    },
+    åpningstider: {
+      text: '🕐 Våre åpningstider:\n\n📅 Mandag – Fredag: 10:00 – 19:00\n📅 Lørdag: 10:00 – 17:00\n📅 Søndag: Etter avtale\n\nVi er også tilgjengelige på telefon og e-post.',
+      links: [],
+      quick: ['Ring oss', 'Send melding', 'Adresse']
+    },
+    adresse: {
+      text: '📍 Du finner oss her:\n\nSpikerveien 7A\n3055 Krokstadelva\n(Nær Drammen)',
+      links: [{label:'Se i Google Maps →', url:'https://maps.google.com/?q=Spikerveien+7A,+3055+Krokstadelva'}],
+      quick: ['Åpningstider', 'Ring oss', 'Send melding']
+    },
+    ring: {
+      text: '📞 Ring oss direkte på:\n\n+47 46 25 59 02\n\nVi svarer i åpningstiden man–fre 10–19, lør 10–17.',
+      links: [{label:'Ring nå →', url:'tel:+4746255902'}],
+      quick: ['Åpningstider', 'Send melding', 'Se biler']
+    },
+    garanti: {
+      text: '🛡️ Alle biler vi selger er grundig kvalitetssikret. Vi tilbyr full dokumentasjon og garanti — slik at du handler trygt uten ubehagelige overraskelser i etterkant.',
+      links: [{label:'Kontakt oss for detaljer →', url:'#kontakt'}],
+      quick: ['Se biler', 'Ring oss', 'Kjøpe bil']
+    },
+    pris: {
+      text: '💳 Vi tilbyr konkurransedyktige priser uten skjulte avgifter. Kjøp direkte fra oss og spar det en mellommann ville tatt. Kontakt oss for å diskutere pris og eventuelle finansieringsmuligheter.',
+      links: [{label:'Ta kontakt →', url:'#kontakt'}],
+      quick: ['Se biler', 'Ring oss', 'Åpningstider']
+    },
+    melding: {
+      text: '✉️ Send oss en melding via kontaktskjemaet — vi svarer innen samme dag!',
+      links: [{label:'Gå til kontaktskjema →', url:'#kontakt'}],
+      quick: ['Ring oss', 'Åpningstider', 'Se biler']
+    },
+    default: {
+      text: 'Takk for meldingen! 😊 For rask hjelp, velg ett av alternativene nedenfor — eller ring oss direkte på +47 46 25 59 02.',
+      links: [],
+      quick: ['Kjøpe bil', 'Selge bil', 'Åpningstider', 'Ring oss']
+    }
+  };
+
+  const KEYWORDS = {
+    kjøpe: ['kjøp','kjøpe','bil','biler','finn','utvalg','se biler'],
+    selge: ['selg','selge','hva er bilen','tilbud','verdt','kjøpe min','innbytte'],
+    kommisjon: ['kommisjon','kommisjonssalg'],
+    åpningstider: ['åpningstid','åpen','stengt','når','tid','time'],
+    adresse: ['adresse','hvor','krokstadelva','drammen','finn dere','veien'],
+    ring: ['ring','telefon','tlf','nummer','ringe'],
+    garanti: ['garanti','trygg','kvalitet','sikret','dokument'],
+    pris: ['pris','finansier','koste','koster','billig','dyr','betale'],
+    melding: ['melding','mail','e-post','skriv','kontakt','skjema'],
+  };
+
+  function matchResponse(text) {
+    const t = text.toLowerCase();
+    for (const [key, words] of Object.entries(KEYWORDS)) {
+      if (words.some(w => t.includes(w))) return RESPONSES[key];
+    }
+    return RESPONSES.default;
+  }
+
+  let chatOpen = false;
+  let firstOpen = true;
+
+  function toggleChat() {
+    chatOpen = !chatOpen;
+    const btn = document.getElementById('chat-btn');
+    const win = document.getElementById('chat-window');
+    btn.classList.toggle('open', chatOpen);
+    if (chatOpen) {
+      // Remove notif badge
+      const notif = btn.querySelector('.chat-notif');
+      if (notif) notif.remove();
+      win.style.display = 'flex';
+      requestAnimationFrame(() => { win.classList.add('visible'); });
+      if (firstOpen) { firstOpen = false; initChat(); }
+      setTimeout(() => document.getElementById('cwInput').focus(), 300);
+    } else {
+      win.classList.remove('visible');
+      setTimeout(() => { win.style.display = 'none'; }, 250);
+    }
+  }
+
+  function initChat() {
+    setTimeout(() => addBotMsg('👋 Hei! Velkommen til Daytona Bilsenter. Hvordan kan jeg hjelpe deg i dag?',
+      [], ['Kjøpe bil', 'Selge bil', 'Åpningstider', 'Ring oss']), 400);
+  }
+
+  function addBotMsg(text, links=[], quick=[]) {
+    const msgs = document.getElementById('cwMessages');
+    // typing indicator
+    const typingEl = document.createElement('div');
+    typingEl.className = 'msg bot';
+    typingEl.innerHTML = `<div class="msg-avatar">🚗</div><div class="msg-bubble"><div class="typing-dots"><span></span><span></span><span></span></div></div>`;
+    msgs.appendChild(typingEl);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    setTimeout(() => {
+      typingEl.remove();
+      const el = document.createElement('div');
+      el.className = 'msg bot';
+      const formattedText = text.replace(/\n/g, '<br>');
+      let linksHtml = links.map(l =>
+        `<a href="${l.url}" ${l.url.startsWith('http')?'target="_blank" rel="noopener noreferrer"':''} style="display:inline-flex;align-items:center;gap:.3rem;margin-top:.6rem;color:var(--red);font-weight:700;font-size:.78rem;text-decoration:none;">${l.label}</a>`
+      ).join('');
+      el.innerHTML = `<div class="msg-avatar">🚗</div><div class="msg-bubble">${formattedText}${linksHtml ? '<div style="display:flex;flex-direction:column;">'+linksHtml+'</div>' : ''}</div>`;
+      msgs.appendChild(el);
+      msgs.scrollTop = msgs.scrollHeight;
+      setQuickReplies(quick);
+    }, 900);
+  }
+
+  function addUserMsg(text) {
+    const msgs = document.getElementById('cwMessages');
+    const el = document.createElement('div');
+    el.className = 'msg user';
+    el.innerHTML = `<div class="msg-bubble">${text}</div>`;
+    msgs.appendChild(el);
+    msgs.scrollTop = msgs.scrollHeight;
+    setQuickReplies([]);
+  }
+
+  function setQuickReplies(quick) {
+    const qc = document.getElementById('cwQuick');
+    qc.innerHTML = quick.map(q =>
+      `<button class="qr-btn" onclick="handleQuick('${q}')">${q}</button>`
+    ).join('');
+  }
+
+  function handleQuick(label) {
+    addUserMsg(label);
+    const key = label.toLowerCase();
+    let resp;
+    if (key.includes('kjøpe') || key.includes('se biler')) resp = RESPONSES.kjøpe;
+    else if (key.includes('selge') || key.includes('tilbud') || key.includes('verdt')) resp = RESPONSES.selge;
+    else if (key.includes('kommisjon')) resp = RESPONSES.kommisjon;
+    else if (key.includes('åpningstid')) resp = RESPONSES.åpningstider;
+    else if (key.includes('ring')) resp = RESPONSES.ring;
+    else if (key.includes('garanti')) resp = RESPONSES.garanti;
+    else if (key.includes('pris') || key.includes('finansier')) resp = RESPONSES.pris;
+    else if (key.includes('melding') || key.includes('kontakt')) resp = RESPONSES.melding;
+    else if (key.includes('adresse')) resp = RESPONSES.adresse;
+    else resp = matchResponse(label);
+    setTimeout(() => addBotMsg(resp.text, resp.links, resp.quick), 150);
+  }
+
+  function sendUserMsg() {
+    const input = document.getElementById('cwInput');
+    const text = input.value.trim();
+    if (!text) return;
+    input.value = '';
+    addUserMsg(text);
+    const resp = matchResponse(text);
+    setTimeout(() => addBotMsg(resp.text, resp.links, resp.quick), 150);
+  }
+
   /* ── Nav scroll ── */
   const nav = document.getElementById('nav');
   window.addEventListener('scroll', () => {
