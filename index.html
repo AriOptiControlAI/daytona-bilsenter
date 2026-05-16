@@ -379,6 +379,33 @@
     .foot-legal a { font-size: .78rem; color: var(--dim); text-decoration: none; transition: color .2s; }
     .foot-legal a:hover { color: var(--muted); }
 
+    /* ── FAQ ── */
+    .faq-item { background:var(--surf); border:1px solid var(--border); border-radius:14px; overflow:hidden; transition:border-color .2s; }
+    .faq-item:hover { border-color:rgba(220,38,38,.25); }
+    .faq-q {
+      width:100%; background:none; border:none; padding:1.15rem 1.4rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:space-between; gap:1rem;
+      font-family:'Manrope',sans-serif; font-weight:700; font-size:.92rem;
+      color:var(--text); text-align:left;
+    }
+    .faq-q:hover { color:#fff; }
+    .faq-arrow { flex-shrink:0; transition:transform .3s ease; color:var(--red); }
+    .faq-q.open .faq-arrow { transform:rotate(180deg); }
+    .faq-a {
+      max-height:0; overflow:hidden; padding:0 1.4rem;
+      font-size:.86rem; color:var(--muted); line-height:1.75;
+      transition:max-height .35s ease, padding .3s ease;
+    }
+    .faq-a.open { max-height:200px; padding:.1rem 1.4rem 1.2rem; }
+
+    /* ── Garanti responsive ── */
+    @media(max-width:768px) {
+      #garanti .wrap > div { grid-template-columns:1fr !important; gap:2.5rem; }
+      #verdivurdering .wrap form > div:first-child,
+      #verdivurdering .wrap form > div:nth-child(2),
+      #verdivurdering .wrap form > div:nth-child(3) { grid-template-columns:1fr !important; }
+    }
+
     /* ── Responsive ── */
     @media (max-width: 1024px) {
       .om-grid { grid-template-columns: 1fr 1fr; }
@@ -487,7 +514,9 @@
   <a href="#" onclick="closeMobile()">Hjem</a>
   <a href="#om" onclick="closeMobile()">Om oss</a>
   <a href="#selg" onclick="closeMobile()">Selg bil</a>
+  <a href="#verdivurdering" onclick="closeMobile()">Verdivurdering</a>
   <a href="#tjenester" onclick="closeMobile()">Kommisjonssalg</a>
+  <a href="#faq" onclick="closeMobile()">FAQ</a>
   <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
   <a href="tel:+4746255902" class="btn-primary" style="margin-top:1rem;">Ring oss</a>
 </div>
@@ -694,90 +723,146 @@
   </div>
   <div class="reviews-track-wrap rv d1">
     <div class="reviews-track" id="reviewsTrack">
-      <!-- Set 1 -->
+      <!-- Real Google reviews – Set 1 -->
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Solgte bilen min på to dager. Utrolig rask og profesjonell service — de tok hånd om alt papirarbeidet."</div>
-        <div class="review-author">Kristoffer H.</div>
-        <div class="review-date">Januar 2025</div>
+        <div class="review-text">"Topp opplevelse og hyggelig handel! Kunnskapsrike selgere og du blir ivaretatt som kunde, null tull i kjøpsprosessen 👍"</div>
+        <div class="review-author">Kevolini juu</div>
+        <div class="review-date">2 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kjøpte min første bruktbil her. Fikk grundig gjennomgang av bilen og full garanti. Trygg handel fra start til slutt!"</div>
-        <div class="review-author">Marte S.</div>
-        <div class="review-date">Februar 2025</div>
+        <div class="review-text">"Helt nydelig! Meget god service, rask tilbakemelding. Bilen levert i forventede tilstand og på avtalte tidspunkt. Vennlig og effektiv, tar seg tid til å svare på spørsmål. Anbefales; smooth handel, rettferdig pris og holder avtaler."</div>
+        <div class="review-author">Valerie Bertrand</div>
+        <div class="review-date">7 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Seriøse og ærlige folk. Fikk god pris for bilen min uten masse tull og forhandlinger. Anbefaler på det sterkeste."</div>
-        <div class="review-author">Thomas B.</div>
-        <div class="review-date">Mars 2025</div>
+        <div class="review-text">"Veldig fornøyd med kundeservice. En god opplevelse å kjøpe bil herfra."</div>
+        <div class="review-author">Trond Grimen <span style="font-size:.7rem;color:var(--red);">· Local Guide</span></div>
+        <div class="review-date">3 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Ringte om morgenen, hadde tilbud samme ettermiddag. Penger på konto tre dager etter. Kan ikke be om mer!"</div>
-        <div class="review-author">Ingrid K.</div>
-        <div class="review-date">April 2025</div>
+        <div class="review-text">"Kjøpte en eldre varebil her. Kort tid etter oppdaget jeg at hengerfestekontakten ikke fungerte optimalt. Selgeren bestilte raskt time for meg, og ny kontakt ble montert kostnadsfritt allerede etter en dag. Anbefaler å kjøpe bil hos Daytona Bil!"</div>
+        <div class="review-author">Dream Balloons</div>
+        <div class="review-date">7 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Veldig hyggelig og personlig service. Følte meg ivaretatt gjennom hele prosessen. Vil definitivt komme tilbake."</div>
-        <div class="review-author">Anders M.</div>
-        <div class="review-date">April 2025</div>
+        <div class="review-text">"Topp service! Kjøpte min første bil og den var i topp stand! Veldig dyktig selger som har mye kunnskap for det han selger!"</div>
+        <div class="review-author">Hien Nguyen</div>
+        <div class="review-date">7 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Byttet inn bilen og kjøpte ny av dem. Smidig prosess og god pris på innbytte. Lokalt og pålitelig."</div>
-        <div class="review-author">Silje R.</div>
-        <div class="review-date">Mai 2025</div>
-        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
-      </div>
-      <!-- Duplicate for seamless loop -->
-      <div class="review-card">
-        <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Solgte bilen min på to dager. Utrolig rask og profesjonell service — de tok hånd om alt papirarbeidet."</div>
-        <div class="review-author">Kristoffer H.</div>
-        <div class="review-date">Januar 2025</div>
+        <div class="review-text">"Daytona kjøpte bilen vår. Vi opplevde handelen og kontakten med dem som hyggelig, ryddig og profesjonell. Vi anbefaler å ta kontakt med dem om man ønsker å selge eller kjøpe bil."</div>
+        <div class="review-author">Kim-Andre Johansen</div>
+        <div class="review-date">7 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Kjøpte min første bruktbil her. Fikk grundig gjennomgang av bilen og full garanti. Trygg handel fra start til slutt!"</div>
-        <div class="review-author">Marte S.</div>
-        <div class="review-date">Februar 2025</div>
+        <div class="review-text">"Veldig fornøyd med bilkjøp. Utrolig grei og koselig selger. Veldig flink til å forklare om ting — sånn at også jeg som ikke kan så mye om bil, forstod ting og tang. Kan virkelig anbefale dette stedet."</div>
+        <div class="review-author">Heidi Lima de la Cruz</div>
+        <div class="review-date">9 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Seriøse og ærlige folk. Fikk god pris for bilen min uten masse tull og forhandlinger. Anbefaler på det sterkeste."</div>
-        <div class="review-author">Thomas B.</div>
-        <div class="review-date">Mars 2025</div>
+        <div class="review-text">"Fantastisk service fra selger! MEGET fornøyd med alt fra telefonkontakt til henting på togstasjon og alt det praktiske rundt kjøpet av vår bil. Takk for en fin handel! — Tore Brattgjerd"</div>
+        <div class="review-author">TeBe Studio</div>
+        <div class="review-date">10 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Ringte om morgenen, hadde tilbud samme ettermiddag. Penger på konto tre dager etter. Kan ikke be om mer!"</div>
-        <div class="review-author">Ingrid K.</div>
-        <div class="review-date">April 2025</div>
+        <div class="review-text">"Profesjonelle folk og attpåtil veldig sympatiske. Effektiv handel, ingen overraskelser, kan anbefales på det varmeste."</div>
+        <div class="review-author">Ole-Morten Mjelva Pettersen</div>
+        <div class="review-date">9 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Veldig hyggelig og personlig service. Følte meg ivaretatt gjennom hele prosessen. Vil definitivt komme tilbake."</div>
-        <div class="review-author">Anders M.</div>
-        <div class="review-date">April 2025</div>
+        <div class="review-text">"Ryddig og greit salg, hyggelige folk, raskt oppgjør."</div>
+        <div class="review-author">Peter Høeg</div>
+        <div class="review-date">6 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <!-- Duplicate set for seamless loop -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Topp opplevelse og hyggelig handel! Kunnskapsrike selgere og du blir ivaretatt som kunde, null tull i kjøpsprosessen 👍"</div>
+        <div class="review-author">Kevolini juu</div>
+        <div class="review-date">2 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
       <div class="review-card">
         <div class="review-stars">★★★★★</div>
-        <div class="review-text">"Byttet inn bilen og kjøpte ny av dem. Smidig prosess og god pris på innbytte. Lokalt og pålitelig."</div>
-        <div class="review-author">Silje R.</div>
-        <div class="review-date">Mai 2025</div>
+        <div class="review-text">"Helt nydelig! Meget god service, rask tilbakemelding. Bilen levert i forventede tilstand og på avtalte tidspunkt. Vennlig og effektiv, tar seg tid til å svare på spørsmål. Anbefales; smooth handel, rettferdig pris og holder avtaler."</div>
+        <div class="review-author">Valerie Bertrand</div>
+        <div class="review-date">7 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Veldig fornøyd med kundeservice. En god opplevelse å kjøpe bil herfra."</div>
+        <div class="review-author">Trond Grimen <span style="font-size:.7rem;color:var(--red);">· Local Guide</span></div>
+        <div class="review-date">3 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Kjøpte en eldre varebil her. Kort tid etter oppdaget jeg at hengerfestekontakten ikke fungerte optimalt. Selgeren bestilte raskt time for meg, og ny kontakt ble montert kostnadsfritt allerede etter en dag. Anbefaler å kjøpe bil hos Daytona Bil!"</div>
+        <div class="review-author">Dream Balloons</div>
+        <div class="review-date">7 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Topp service! Kjøpte min første bil og den var i topp stand! Veldig dyktig selger som har mye kunnskap for det han selger!"</div>
+        <div class="review-author">Hien Nguyen</div>
+        <div class="review-date">7 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Daytona kjøpte bilen vår. Vi opplevde handelen og kontakten med dem som hyggelig, ryddig og profesjonell. Vi anbefaler å ta kontakt med dem om man ønsker å selge eller kjøpe bil."</div>
+        <div class="review-author">Kim-Andre Johansen</div>
+        <div class="review-date">7 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Veldig fornøyd med bilkjøp. Utrolig grei og koselig selger. Veldig flink til å forklare om ting — sånn at også jeg som ikke kan så mye om bil, forstod ting og tang. Kan virkelig anbefale dette stedet."</div>
+        <div class="review-author">Heidi Lima de la Cruz</div>
+        <div class="review-date">9 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Fantastisk service fra selger! MEGET fornøyd med alt fra telefonkontakt til henting på togstasjon og alt det praktiske rundt kjøpet av vår bil. Takk for en fin handel! — Tore Brattgjerd"</div>
+        <div class="review-author">TeBe Studio</div>
+        <div class="review-date">10 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Profesjonelle folk og attpåtil veldig sympatiske. Effektiv handel, ingen overraskelser, kan anbefales på det varmeste."</div>
+        <div class="review-author">Ole-Morten Mjelva Pettersen</div>
+        <div class="review-date">9 måneder siden</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Ryddig og greit salg, hyggelige folk, raskt oppgjør."</div>
+        <div class="review-author">Peter Høeg</div>
+        <div class="review-date">6 måneder siden</div>
         <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
       </div>
     </div>
@@ -838,6 +923,175 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── GARANTI & TRYGGHET ── -->
+<section id="garanti" class="section-pad" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
+      <div class="rv">
+        <div class="section-label">Garanti & trygghet</div>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;margin-bottom:1rem;font-family:'Manrope',sans-serif;letter-spacing:-.02em;">Du handler alltid trygt hos oss.</h2>
+        <p style="color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:2rem;">Hos Daytona Bilsenter er tillit grunnlaget for alt vi gjør. Alle biler vi selger er gjennomgått og dokumentert — slik at du vet nøyaktig hva du kjøper.</p>
+        <a href="#kontakt" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Spør oss om garanti
+        </a>
+      </div>
+      <div class="rv d2" style="display:flex;flex-direction:column;gap:.85rem;">
+        <div style="background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(220,38,38,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:.92rem;margin-bottom:.25rem;">Kvalitetssikret & kontrollert</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6;">Alle biler gjennomgås grundig før salg — motor, karosseri og dokumentasjon.</div></div>
+        </div>
+        <div style="background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(220,38,38,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:.92rem;margin-bottom:.25rem;">Full dokumentasjon inkludert</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6;">Serviceheftet, EU-kontroll og historikk følger alltid med ved kjøp.</div></div>
+        </div>
+        <div style="background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(220,38,38,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+          </div>
+          <div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:.92rem;margin-bottom:.25rem;">Ettersalgs-oppfølging</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6;">Oppstår det noe etter kjøp? Vi stiller opp. Som Dream Balloons erfarte — vi fikset det kostnadsfritt.</div></div>
+        </div>
+        <div style="background:var(--surf);border:1px solid var(--border);border-radius:14px;padding:1.25rem 1.5rem;display:flex;gap:1rem;align-items:flex-start;transition:border-color .2s;" onmouseover="this.style.borderColor='rgba(220,38,38,.35)'" onmouseout="this.style.borderColor='rgba(255,255,255,.08)'">
+          <div style="width:40px;height:40px;border-radius:10px;background:rgba(220,38,38,.1);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+          </div>
+          <div><div style="font-family:'Manrope',sans-serif;font-weight:800;font-size:.92rem;margin-bottom:.25rem;">Trygg betaling & kontrakt</div><div style="font-size:.82rem;color:var(--muted);line-height:1.6;">Vi sørger for sikker pengeoverføring og riktig kontrakt — ingen overraskelser i etterkant.</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── VERDIVURDERING ── -->
+<section id="verdivurdering" class="section-pad" style="background:var(--bg);">
+  <div class="wrap">
+    <div style="max-width:700px;margin:0 auto;text-align:center;">
+      <div class="section-label rv" style="justify-content:center;">Gratis verdivurdering</div>
+      <h2 class="rv d1" style="font-size:clamp(1.8rem,3.5vw,2.8rem);font-weight:900;margin-bottom:.75rem;font-family:'Manrope',sans-serif;letter-spacing:-.02em;">Hva er bilen din verdt?</h2>
+      <p class="rv d2" style="color:var(--muted);font-size:.95rem;line-height:1.8;margin-bottom:2.5rem;">Fyll inn skjemaet under — vi sender deg et konkret, uforpliktende tilbud innen 24 timer.</p>
+    </div>
+    <div class="rv d2" style="max-width:680px;margin:0 auto;background:var(--bg2);border:1px solid var(--border);border-radius:20px;padding:2.5rem;">
+      <form onsubmit="sendVerdivurdering(event)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:.85rem;">
+          <div class="form-group" style="margin:0;">
+            <label>Registreringsnummer</label>
+            <input type="text" id="v-reg" placeholder="AB 12345" required style="text-transform:uppercase;"/>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label>Kilometerstand</label>
+            <input type="number" id="v-km" placeholder="85 000" required/>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:.85rem;">
+          <div class="form-group" style="margin:0;">
+            <label>Årsmodell</label>
+            <input type="number" id="v-year" placeholder="2018" min="1990" max="2026" required/>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label>Bilens tilstand</label>
+            <select id="v-cond">
+              <option value="Veldig god">Veldig god</option>
+              <option value="God" selected>God</option>
+              <option value="Noe slitasje">Noe slitasje</option>
+              <option value="Trenger reparasjon">Trenger reparasjon</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:.85rem;margin-bottom:.85rem;">
+          <div class="form-group" style="margin:0;">
+            <label>Navn</label>
+            <input type="text" id="v-name" placeholder="Ditt navn" required/>
+          </div>
+          <div class="form-group" style="margin:0;">
+            <label>Telefon</label>
+            <input type="tel" id="v-tel" placeholder="+47 xxx xx xxx" required/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Ekstra informasjon (valgfritt)</label>
+          <textarea id="v-info" placeholder="Service-historikk, utstyr, skader eller annet vi bør vite..."></textarea>
+        </div>
+        <button type="submit" class="btn-primary form-submit" style="margin-top:.25rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          Send inn for verdivurdering
+        </button>
+        <div id="v-success" style="display:none;margin-top:1rem;padding:.9rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:10px;color:#4ADE80;font-size:.85rem;text-align:center;font-weight:600;">
+          ✓ Vi har mottatt forespørselen din! Du hører fra oss innen 24 timer.
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ── FAQ ── -->
+<section id="faq" class="section-pad" style="background:var(--bg2);border-top:1px solid var(--border);">
+  <div class="wrap">
+    <div class="section-head rv" style="margin:0 auto 3rem;text-align:center;max-width:560px;">
+      <div class="section-label" style="justify-content:center;">Vanlige spørsmål</div>
+      <h2 style="font-size:clamp(1.8rem,3vw,2.8rem);font-weight:900;font-family:'Manrope',sans-serif;letter-spacing:-.02em;">Har du spørsmål?<br>Vi har svarene.</h2>
+    </div>
+    <div style="max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:.65rem;" id="faqList">
+      <div class="faq-item rv">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hvor lang tid tar det fra jeg sender tilbud til jeg får pengene?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Når du har akseptert tilbudet vårt, tar hele prosessen typisk 1–3 virkedager. Vi tar oss av all dokumentasjon og paperwork, og pengene overføres direkte til din konto.</div>
+      </div>
+      <div class="faq-item rv d1">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Kan jeg selge en bil som har lån på seg?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ja, det er fullt mulig. Vi hjelper deg med å innfri lånet som en del av oppgjøret. Du mottar differansen mellom tilbudsprisen og restgjelden direkte på konto.</div>
+      </div>
+      <div class="faq-item rv d2">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Kan jeg bytte inn bilen min mot en annen bil?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Absolutt! Vi tilbyr innbytte mot biler i vårt utvalg. Verdivurderingen av din bil gjøres på stedet, og du betaler kun mellomlegget. En enkel og praktisk løsning.</div>
+      </div>
+      <div class="faq-item rv d3">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hva er inkludert i garantien ved kjøp?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Alle biler selges med full dokumentasjon, serviceheftet og EU-kontroll. Ved feil eller mangler som ikke var opplyst ved kjøp, stiller vi opp. Vi ønsker at du skal være 100% fornøyd — som våre Google-anmeldelser viser.</div>
+      </div>
+      <div class="faq-item rv d4">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Kan jeg prøvekjøre bilen før kjøp?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ja, selvfølgelig. Prøvekjøring er en naturlig del av kjøpsprosessen. Ta kontakt med oss for å avtale tid — vi er tilgjengelig mandag–fredag 10–19 og lørdag 10–17.</div>
+      </div>
+      <div class="faq-item rv d5">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hva er kommisjonssalg og hva koster det?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ved kommisjonssalg selger vi bilen din på vegne av deg — du setter prisen, vi tar en fast kommisjon ved salg. Vi håndterer annonser, visninger og kontrakt. Du betaler ingenting før bilen er solgt.</div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hjelper dere med registrering og papirarbeid?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ja! Vi tar oss av all kommunikasjon med Statens vegvesen, eierskifte og nødvendige dokumenter — enten du kjøper eller selger. Du trenger bare å møte opp og signere.</div>
+      </div>
+    </div>
+    <div class="rv" style="text-align:center;margin-top:2.5rem;">
+      <p style="color:var(--muted);font-size:.88rem;margin-bottom:1rem;">Finner du ikke svaret du leter etter?</p>
+      <a href="#kontakt" class="btn-secondary">Ta kontakt med oss</a>
     </div>
   </div>
 </section>
@@ -1301,6 +1555,38 @@
     addUserMsg(text);
     const resp = matchResponse(text);
     setTimeout(() => addBotMsg(resp.text, resp.links, resp.quick), 150);
+  }
+
+  /* ── FAQ accordion ── */
+  function toggleFaq(btn) {
+    const answer = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => {
+      b.classList.remove('open');
+      b.nextElementSibling.classList.remove('open');
+    });
+    if (!isOpen) {
+      btn.classList.add('open');
+      answer.classList.add('open');
+    }
+  }
+
+  /* ── Verdivurdering form ── */
+  function sendVerdivurdering(e) {
+    e.preventDefault();
+    const reg   = document.getElementById('v-reg').value.toUpperCase();
+    const km    = document.getElementById('v-km').value;
+    const year  = document.getElementById('v-year').value;
+    const cond  = document.getElementById('v-cond').value;
+    const name  = document.getElementById('v-name').value;
+    const tel   = document.getElementById('v-tel').value;
+    const info  = document.getElementById('v-info').value;
+    const body  = encodeURIComponent(
+      `Verdivurdering forespørsel\n\nReg.nr: ${reg}\nKilometerstand: ${km} km\nÅrsmodell: ${year}\nTilstand: ${cond}\n\nNavn: ${name}\nTelefon: ${tel}\n\nEkstra info:\n${info || '–'}`
+    );
+    window.location.href = `mailto:post@daytonabilsenter.no?subject=Verdivurdering - ${reg}&body=${body}`;
+    document.getElementById('v-success').style.display = 'block';
+    e.target.reset();
   }
 
   /* ── Nav scroll ── */
