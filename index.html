@@ -1031,7 +1031,7 @@
   </div>
 </section>
 
-<!-- ── FAQ ── -->
+<!-- ── KONTAKT ── -->
 <section id="faq" class="section-pad" style="background:var(--bg2);border-top:1px solid var(--border);">
   <div class="wrap">
     <div class="section-head rv" style="margin:0 auto 3rem;text-align:center;max-width:560px;">
@@ -1096,7 +1096,7 @@
   </div>
 </section>
 
-<!-- ── KONTAKT ── -->
+<!-- ── FAQ ── -->
 <section id="kontakt">
   <div class="wrap">
     <div class="section-head rv">
@@ -1464,6 +1464,15 @@
 
   let chatOpen = false;
   let firstOpen = true;
+  let autoOpened = false;
+
+  // Auto-open after 3 seconds
+  setTimeout(() => {
+    if (!chatOpen && !autoOpened) {
+      autoOpened = true;
+      toggleChat();
+    }
+  }, 3000);
 
   function toggleChat() {
     chatOpen = !chatOpen;
