@@ -85,7 +85,7 @@
       backdrop-filter: blur(20px);
       padding: .75rem 2rem;
     }
-    .nav-logo img { height: 44px; width: auto; display: block; }
+    .nav-logo img { height: 70px; width: auto; display: block; }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
       font-size: .85rem; font-weight: 600; color: var(--muted);
@@ -125,57 +125,57 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 7rem 2rem 4rem; overflow: hidden;
+      padding: 8rem 2rem 5rem; overflow: hidden; text-align: center;
       background:
-        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(220,38,38,.07) 0%, transparent 60%),
-        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(220,38,38,.04) 0%, transparent 55%),
-        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(13,15,21,.9) 0%, transparent 70%),
-        linear-gradient(160deg, #07080C 0%, #0D0F18 50%, #07080C 100%);
+        radial-gradient(ellipse 70% 55% at 50% 60%, rgba(220,38,38,.1) 0%, transparent 65%),
+        radial-gradient(ellipse 100% 50% at 50% 100%, rgba(220,38,38,.06) 0%, transparent 60%),
+        linear-gradient(180deg, #07080C 0%, #0C0E16 60%, #07080C 100%);
     }
-    /* Diagonal speed-lines background */
     #hero::after {
       content: '';
       position: absolute; inset: 0; z-index: 0; pointer-events: none;
       background-image: repeating-linear-gradient(
         -65deg,
-        transparent, transparent 120px,
-        rgba(255,255,255,.012) 120px, rgba(255,255,255,.012) 121px
+        transparent, transparent 140px,
+        rgba(255,255,255,.01) 140px, rgba(255,255,255,.01) 141px
       );
     }
-    .hero-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 1; width: 100%; }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: .5rem;
-      border: 1px solid rgba(220,38,38,.3); background: rgba(220,38,38,.08);
-      border-radius: 999px; padding: .35rem .9rem; font-size: .7rem; font-weight: 700;
-      letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-bottom: 1.75rem;
+    .hero-inner { max-width: 860px; margin: 0 auto; position: relative; z-index: 1; width: 100%; }
+    .hero-trust-top {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.06); border: 1px solid var(--border);
+      border-radius: 999px; padding: .45rem 1.1rem; font-size: .82rem; font-weight: 600;
+      color: var(--text); margin-bottom: 2rem;
     }
-    .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--red); animation:blink 2s ease infinite; }
+    .hero-trust-top .stars { color: #FBBF24; }
     h1.hero-h1 {
-      font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 900;
-      letter-spacing: -.03em; margin-bottom: 1.25rem; line-height: 1.05;
+      font-size: clamp(3rem, 8vw, 6.5rem); font-weight: 900;
+      letter-spacing: -.03em; margin-bottom: 1.5rem; line-height: 1.0;
     }
     .hero-sub {
-      font-size: clamp(.95rem, 1.8vw, 1.15rem); color: var(--muted);
-      max-width: 520px; margin-bottom: 2.75rem; line-height: 1.7;
+      font-size: clamp(.95rem, 1.8vw, 1.1rem); color: var(--muted);
+      max-width: 520px; margin: 0 auto 2.75rem; line-height: 1.75;
     }
-    .hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 580px; margin-bottom: 2.5rem; }
+    .hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 620px; margin: 0 auto 2.5rem; }
     .hero-card {
       background: var(--surf); border: 1px solid var(--border);
-      border-radius: 16px; padding: 1.5rem; cursor: pointer; text-decoration: none;
-      display: block; transition: background .25s, border-color .25s, transform .25s;
+      border-radius: 18px; padding: 1.6rem; cursor: pointer; text-decoration: none;
+      display: block; text-align: left; transition: background .25s, border-color .25s, transform .25s;
+      color: var(--text);
     }
-    .hero-card:hover { background: var(--surf-h); border-color: rgba(220,38,38,.4); transform: translateY(-3px); }
-    .hero-card:hover .hc-arrow { transform: translateX(4px); color: var(--red); }
+    .hero-card:hover { background: var(--surf-h); border-color: rgba(220,38,38,.5); transform: translateY(-4px); box-shadow: 0 16px 40px rgba(220,38,38,.12); }
+    .hero-card:hover .hc-arrow { transform: translateX(4px); }
+    .hc-label { font-size: .65rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
     .hc-icon {
-      width: 40px; height: 40px; border-radius: 10px;
+      width: 44px; height: 44px; border-radius: 10px;
       background: var(--red-dim); display: flex; align-items: center; justify-content: center;
       margin-bottom: 1rem;
     }
-    .hc-icon svg { width: 20px; height: 20px; color: var(--red); stroke: currentColor; }
-    .hc-title { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: .3rem; }
-    .hc-sub { font-size: .8rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.5; }
-    .hc-arrow { font-size: .82rem; font-weight: 700; color: var(--red); display: flex; align-items: center; gap: .35rem; transition: transform .2s, color .2s; }
-    .hero-trust { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .hc-icon svg { width: 22px; height: 22px; color: var(--red); stroke: currentColor; }
+    .hc-title { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1.1rem; margin-bottom: .35rem; color: var(--text); }
+    .hc-sub { font-size: .8rem; color: var(--muted); margin-bottom: 1.1rem; line-height: 1.55; }
+    .hc-arrow { font-size: .82rem; font-weight: 700; color: var(--red); display: flex; align-items: center; gap: .35rem; transition: transform .2s; }
+    .hero-trust { display: flex; align-items: center; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
     .trust-item { display: flex; align-items: center; gap: .45rem; font-size: .8rem; color: var(--muted); }
     .trust-item .stars { color: #FBBF24; letter-spacing: 1px; font-size: .75rem; }
     .trust-sep { width: 1px; height: 18px; background: var(--border); }
@@ -439,45 +439,49 @@
 <!-- ── HERO ── -->
 <section id="hero">
   <div class="hero-inner">
-    <div class="hero-badge rv">Bilforhandler i Drammen</div>
+    <div class="hero-trust-top rv">
+      <span class="stars">★</span> 4.8 stjerner &nbsp;·&nbsp; 57+ fornøyde kunder
+    </div>
     <h1 class="hero-h1 rv d1">
-      Kjøp og selg bil<br>i <span class="red">Drammen</span> —<br>trygt og direkte.
+      Bilforhandler i<br><span class="red">Drammen</span>
     </h1>
     <p class="hero-sub rv d2">
-      Hos Daytona Bilsenter handler du direkte med oss — ingen mellommann, ingen FINN-avgifter. Rask avklaring, full dokumentasjon og ærlig service.
+      Kjøp og selg bil trygt — uten mellommann. Velg hva du vil gjøre i dag.
     </p>
     <div class="hero-cards rv d3">
-      <a href="#kontakt" class="hero-card">
+      <a href="https://www.finn.no/mobility/dealer/8854664/daytona-bilsenter-as" target="_blank" rel="noopener noreferrer" class="hero-card">
+        <div class="hc-label">Kjøper</div>
         <div class="hc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="currentColor"/><rect x="9" y="11" width="14" height="10" rx="2" stroke="currentColor"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
         </div>
         <div class="hc-title">Jeg vil kjøpe bil</div>
-        <div class="hc-sub">Se vårt utvalg av kvalitetssikrede biler</div>
+        <div class="hc-sub">Se vårt utvalg av kvalitetssjekkede biler</div>
         <div class="hc-arrow">Se biler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </a>
       <a href="#selg" class="hero-card">
+        <div class="hc-label">Selger</div>
         <div class="hc-icon">
           <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor"/></svg>
         </div>
         <div class="hc-title">Jeg vil selge bil</div>
-        <div class="hc-sub">Få konkret tilbud innen 24 timer</div>
+        <div class="hc-sub">Få et raskt og trygt tilbud — innen 24 timer</div>
         <div class="hc-arrow">Få tilbud <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
       </a>
     </div>
     <div class="hero-trust rv d4">
       <div class="trust-item">
-        <span class="stars">★★★★★</span>
-        <span>4.8 / 5 på Google</span>
-      </div>
-      <div class="trust-sep"></div>
-      <div class="trust-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        57+ fornøyde kunder
-      </div>
-      <div class="trust-sep"></div>
-      <div class="trust-item">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         100% trygg handel
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Etablert i Krokstadelva
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+        Svar innen 24 timer
       </div>
     </div>
   </div>
@@ -504,6 +508,23 @@
     </div>
   </div>
 </div>
+
+<!-- ── FINN.NO BILER ── -->
+<section id="biler" style="padding:5rem 2rem; background:var(--bg); border-bottom:1px solid var(--border);">
+  <div class="wrap" style="text-align:center;">
+    <div class="section-label rv" style="justify-content:center;">Tilgjengelige biler</div>
+    <h2 class="rv d1" style="font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;font-family:'Manrope',sans-serif;letter-spacing:-.02em;">Se våre tilgjengelige biler</h2>
+    <p class="rv d2" style="color:var(--muted);font-size:1rem;max-width:500px;margin:0 auto 2.5rem;line-height:1.75;">Finn hele utvalget vårt av kvalitetssikrede biler på FINN.no — oppdatert fortløpende med nye ankomster.</p>
+    <div class="rv d3" style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="https://www.finn.no/mobility/dealer/8854664/daytona-bilsenter-as" target="_blank" rel="noopener noreferrer" class="btn-primary" style="font-size:1rem;padding:1rem 2.5rem;">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3"/><rect x="9" y="11" width="14" height="10" rx="2"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+        Se alle biler på FINN.no →
+      </a>
+      <a href="#kontakt" class="btn-secondary" style="font-size:1rem;padding:1rem 2rem;">Kontakt oss direkte</a>
+    </div>
+    <p class="rv d4" style="margin-top:1.25rem;font-size:.78rem;color:var(--dim);">Ser du ikke bilen du leter etter? Vi hjelper deg å finne den.</p>
+  </div>
+</section>
 
 <!-- ── OM OSS ── -->
 <section id="om" class="section-pad">
@@ -689,12 +710,13 @@
 <section id="tjenester" class="section-pad">
   <div class="wrap">
     <div class="tjenester-grid">
-      <div class="tjenester-img rv">
-        <div class="tjenester-img-inner">
-          <div class="tj-icon-big">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="currentColor"/><rect x="9" y="11" width="14" height="10" rx="2" stroke="currentColor"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
-          </div>
-        </div>
+      <div class="tjenester-img rv" style="aspect-ratio:4/3;border-radius:20px;overflow:hidden;border:1px solid var(--border);position:relative;">
+        <img
+          src="https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=800&q=80"
+          alt="Luksus bil i showroom"
+          style="width:100%;height:100%;object-fit:cover;display:block;"
+        />
+        <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,8,12,.45) 0%,rgba(220,38,38,.08) 100%);pointer-events:none;"></div>
       </div>
       <div class="tjenester-content rv d2">
         <div class="section-label">Tjeneste</div>
