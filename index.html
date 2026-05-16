@@ -128,7 +128,7 @@
     /* ── HERO ── */
     #hero {
       min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
-      padding: 8rem 2rem 5rem; overflow: hidden; text-align: center;
+      padding: 6rem 2rem 3rem; overflow: hidden; text-align: center;
       background:
         radial-gradient(ellipse 70% 55% at 50% 60%, rgba(220,38,38,.1) 0%, transparent 65%),
         radial-gradient(ellipse 100% 50% at 50% 100%, rgba(220,38,38,.06) 0%, transparent 60%),
@@ -186,7 +186,7 @@
     /* ── STATS BAR ── */
     #stats {
       border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
-      background: var(--bg2); padding: 2.25rem 2rem;
+      background: var(--bg2); padding: 1.5rem 2rem;
     }
     .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 1140px; margin: 0 auto; }
     .stat-item { text-align: center; padding: 1rem; }
@@ -194,8 +194,8 @@
     .stat-lbl { font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
 
     /* ── SECTION COMMON ── */
-    .section-pad { padding: 6rem 2rem; }
-    .section-head { max-width: 640px; margin-bottom: 3.5rem; }
+    .section-pad { padding: 3.5rem 2rem; }
+    .section-head { max-width: 640px; margin-bottom: 2rem; }
     .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: .75rem; }
     .section-head p { color: var(--muted); font-size: 1rem; line-height: 1.75; }
 
@@ -258,7 +258,7 @@
     .btn-group { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
 
     /* ── REVIEWS ── */
-    #anmeldelser { background: var(--bg2); padding: 6rem 2rem; overflow: hidden; }
+    #anmeldelser { background: var(--bg2); padding: 3.5rem 2rem; overflow: hidden; }
     .reviews-track-wrap { overflow: hidden; mask: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
     .reviews-track {
       display: flex; gap: 1.25rem;
@@ -289,7 +289,7 @@
     }
 
     /* ── COMMISSION ── */
-    #tjenester { background: var(--bg); padding: 6rem 2rem; }
+    #tjenester { background: var(--bg); padding: 3.5rem 2rem; }
     .tjenester-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
     .tjenester-img {
       border-radius: 20px; overflow: hidden; position: relative;
@@ -316,7 +316,7 @@
     /* ── CONTACT ── */
     #kontakt {
       background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
-      padding: 6rem 2rem;
+      padding: 3.5rem 2rem;
     }
     .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
     .kontakt-form-wrap h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: .6rem; }
@@ -412,7 +412,7 @@
       .tjenester-grid, .kontakt-grid { grid-template-columns: 1fr; }
       .foot-top { grid-template-columns: 1fr 1fr; }
       .tjenester-img { max-width: 560px; }
-      .section-pad { padding: 5rem 2rem; }
+      .section-pad { padding: 3rem 2rem; }
     }
 
     @media (max-width: 768px) {
@@ -424,7 +424,7 @@
       nav.scrolled { padding: .6rem 1.25rem; }
 
       /* Hero */
-      #hero { padding: 7rem 1.5rem 3.5rem; }
+      #hero { padding: 5.5rem 1.5rem 2.5rem; }
       .hero-trust-top { font-size: .75rem; }
       .hero-cards { grid-template-columns: 1fr 1fr; gap: .75rem; max-width: 100%; }
       .hero-trust { justify-content: flex-start; }
@@ -434,7 +434,7 @@
       .stat-num { font-size: 1.6rem; }
 
       /* Sections */
-      .section-pad { padding: 4rem 1.5rem; }
+      .section-pad { padding: 2.5rem 1.5rem; }
       .selg-grid { grid-template-columns: 1fr; }
       .om-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
@@ -457,7 +457,7 @@
       .nav-logo img { height: 52px; }
 
       /* Hero */
-      #hero { padding: 6.5rem 1.25rem 3rem; }
+      #hero { padding: 5rem 1.25rem 2rem; }
       .hero-cards { grid-template-columns: 1fr; max-width: 100%; }
       .hero-trust { flex-direction: column; align-items: center; gap: .65rem; }
       .trust-sep { display: none; }
@@ -470,9 +470,9 @@
       .stat-lbl { font-size: .68rem; }
 
       /* Sections */
-      .section-pad { padding: 3.5rem 1.25rem; }
+      .section-pad { padding: 2rem 1.25rem; }
       .section-head { margin-bottom: 2.5rem; }
-      #biler { padding: 3.5rem 1.25rem; }
+      #biler { padding: 2rem 1.25rem; }
 
       /* Cards */
       .om-card, .selg-card { padding: 1.5rem; }
@@ -499,7 +499,7 @@
 
     @media (max-width: 380px) {
       .nav-logo img { height: 44px; }
-      #hero { padding: 6rem 1rem 2.5rem; }
+      #hero { padding: 4.5rem 1rem 1.75rem; }
       .hero-cards { gap: .6rem; }
       .hc-title { font-size: .95rem; }
       .section-pad { padding: 3rem 1rem; }
@@ -617,7 +617,7 @@
 </div>
 
 <!-- ── FINN.NO BILER ── -->
-<section id="biler" style="padding:5rem 2rem; background:var(--bg); border-bottom:1px solid var(--border);">
+<section id="biler" style="padding:3rem 2rem; background:var(--bg); border-bottom:1px solid var(--border);">
   <div class="wrap" style="text-align:center;">
     <div class="section-label rv" style="justify-content:center;">Tilgjengelige biler</div>
     <h2 class="rv d1" style="font-size:clamp(2rem,4vw,3rem);font-weight:800;margin-bottom:1rem;font-family:'Manrope',sans-serif;letter-spacing:-.02em;">Se våre tilgjengelige biler</h2>
@@ -868,7 +868,7 @@
     </div>
   </div>
   <!-- Google reviews CTA -->
-  <div style="text-align:center;padding:2.5rem 2rem 3.5rem;position:relative;z-index:1;">
+  <div style="text-align:center;padding:1.5rem 2rem 2rem;position:relative;z-index:1;">
     <div style="display:flex;align-items:center;justify-content:center;gap:.6rem;margin-bottom:1.25rem;">
       <span style="color:#FBBF24;font-size:1.1rem;">★★★★★</span>
       <span style="font-family:'Manrope',sans-serif;font-weight:800;font-size:1rem;">4.8 / 5</span>
@@ -928,7 +928,7 @@
 </section>
 
 <!-- ── GARANTI & TRYGGHET ── -->
-<section id="garanti" class="section-pad" style="background:var(--bg2);border-top:1px solid var(--border);">
+<section id="garanti" style="padding:3.5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);">
   <div class="wrap">
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;">
       <div class="rv">
@@ -971,7 +971,7 @@
 </section>
 
 <!-- ── VERDIVURDERING ── -->
-<section id="verdivurdering" class="section-pad" style="background:var(--bg);">
+<section id="verdivurdering" style="padding:3.5rem 2rem;background:var(--bg);">
   <div class="wrap">
     <div style="max-width:700px;margin:0 auto;text-align:center;">
       <div class="section-label rv" style="justify-content:center;">Gratis verdivurdering</div>
@@ -1139,7 +1139,7 @@
 </section>
 
 <!-- ── FAQ ── -->
-<section id="faq" class="section-pad" style="background:var(--bg2);border-top:1px solid var(--border);">
+<section id="faq" style="padding:3.5rem 2rem;background:var(--bg2);border-top:1px solid var(--border);">
   <div class="wrap">
     <div class="section-head rv" style="margin:0 auto 3rem;text-align:center;max-width:560px;">
       <div class="section-label" style="justify-content:center;">Vanlige spørsmål</div>
