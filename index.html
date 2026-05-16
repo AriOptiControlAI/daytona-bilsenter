@@ -1359,7 +1359,46 @@
     #chat-window { right: .75rem; bottom: 5rem; width: calc(100vw - 1.5rem); }
     #chat-btn { bottom: 1.25rem; right: 1.25rem; }
   }
+
+  /* ── Mobile peek bubble ── */
+  #chat-peek {
+    position: fixed; bottom: 5.5rem; right: 1.75rem; z-index: 199;
+    background: #0D0F15; border: 1px solid rgba(255,255,255,.12);
+    border-radius: 16px; padding: .9rem 1rem; max-width: 240px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.5);
+    display: none; align-items: center; gap: .75rem;
+    cursor: pointer;
+    animation: peekIn .35s cubic-bezier(.34,1.56,.64,1) both;
+  }
+  #chat-peek.show { display: flex; }
+  @keyframes peekIn {
+    from { opacity:0; transform:translateY(10px) scale(.94); }
+    to   { opacity:1; transform:none; }
+  }
+  #chat-peek .pk-avatar { font-size:1.4rem; flex-shrink:0; }
+  #chat-peek .pk-text { font-size:.8rem; color:var(--text); line-height:1.45; flex:1; }
+  #chat-peek .pk-text strong { display:block; font-family:'Manrope',sans-serif; font-weight:800; font-size:.82rem; color:#fff; margin-bottom:.15rem; }
+  #chat-peek .pk-close {
+    width:20px; height:20px; border-radius:50%; background:rgba(255,255,255,.1);
+    border:none; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    flex-shrink:0; color:var(--muted); font-size:.75rem; padding:0;
+    transition:background .2s;
+  }
+  #chat-peek .pk-close:hover { background:rgba(255,255,255,.2); }
+  @media(max-width:420px) {
+    #chat-peek { right: 1.25rem; bottom: 5rem; max-width: 220px; }
+  }
 </style>
+
+<!-- Mobile peek bubble -->
+<div id="chat-peek" onclick="peekToChat()">
+  <div class="pk-avatar">🚗</div>
+  <div class="pk-text">
+    <strong>Daytona Assistent</strong>
+    Kjøpe eller selge bil? Vi hjelper deg! 👋
+  </div>
+  <button class="pk-close" onclick="closePeek(event)">✕</button>
+</div>
 
 <!-- Chat button -->
 <button id="chat-btn" onclick="toggleChat()" aria-label="Åpne chat">
@@ -1466,13 +1505,30 @@
   let firstOpen = true;
   let autoOpened = false;
 
-  // Auto-open after 3 seconds
+  // Auto-open after 3 seconds — peek on mobile, full on desktop
   setTimeout(() => {
     if (!chatOpen && !autoOpened) {
       autoOpened = true;
-      toggleChat();
+      const btn = document.getElementById('chat-btn');
+      const notif = btn.querySelector('.chat-notif');
+      if (notif) notif.remove();
+      if (window.innerWidth <= 768) {
+        document.getElementById('chat-peek').classList.add('show');
+      } else {
+        toggleChat();
+      }
     }
   }, 3000);
+
+  function peekToChat() {
+    document.getElementById('chat-peek').classList.remove('show');
+    toggleChat();
+  }
+
+  function closePeek(e) {
+    e.stopPropagation();
+    document.getElementById('chat-peek').classList.remove('show');
+  }
 
   function toggleChat() {
     chatOpen = !chatOpen;
