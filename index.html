@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Daytona Bilsenter AS — Bilforhandler i Drammen</title>
+  <meta name="description" content="Daytona Bilsenter er din lokale bilforhandler i Krokstadelva/Drammen. Kjøp og selg bil trygt — direkte, uten mellommann. 4.8★ på Google." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800;900&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:       #DC2626;
+      --red-h:     #EF4444;
+      --red-dim:   rgba(220,38,38,.12);
+      --red-glow:  0 0 32px rgba(220,38,38,.35);
+      --bg:        #07080C;
+      --bg2:       #0D0F15;
+      --surf:      rgba(255,255,255,.035);
+      --surf-h:    rgba(255,255,255,.06);
+      --border:    rgba(255,255,255,.08);
+      --border-h:  rgba(255,255,255,.15);
+      --text:      #F0F2F8;
+      --muted:     #8B8E9E;
+      --dim:       rgba(240,242,248,.35);
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* ── Noise texture overlay ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+      opacity: .5;
+    }
+
+    /* ── Typography ── */
+    h1, h2, h3, h4 { font-family: 'Manrope', sans-serif; line-height: 1.15; letter-spacing: -.02em; }
+    .red { color: var(--red); }
+    .muted { color: var(--muted); }
+
+    /* ── Scroll reveal ── */
+    .rv { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .08s; }
+    .d2 { transition-delay: .16s; }
+    .d3 { transition-delay: .24s; }
+    .d4 { transition-delay: .32s; }
+    .d5 { transition-delay: .40s; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 2rem; position: relative; z-index: 1; }
+    section { position: relative; z-index: 1; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: .45rem;
+      font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 1rem;
+    }
+    .section-label::before {
+      content: ''; width: 6px; height: 6px; border-radius: 50%;
+      background: var(--red); flex-shrink: 0; animation: blink 2s ease infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.3} }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1rem 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background .3s, border-color .3s, padding .3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(7,8,12,.92);
+      border-color: var(--border);
+      backdrop-filter: blur(20px);
+      padding: .75rem 2rem;
+    }
+    .nav-logo img { height: 44px; width: auto; display: block; }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-size: .85rem; font-weight: 600; color: var(--muted);
+      text-decoration: none; transition: color .2s; letter-spacing: .01em;
+    }
+    .nav-links a:hover { color: var(--text); }
+    .nav-right { display: flex; align-items: center; gap: .75rem; }
+    .nav-tel {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--red); color: #fff; font-size: .82rem; font-weight: 700;
+      padding: .5rem 1.1rem; border-radius: 8px; text-decoration: none;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .nav-tel:hover { background: var(--red-h); transform: translateY(-1px); box-shadow: var(--red-glow); }
+    .nav-tel svg { width: 14px; height: 14px; flex-shrink: 0; }
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px; cursor: pointer;
+      background: none; border: none; padding: .4rem;
+    }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all .3s; }
+    .mobile-menu {
+      display: none; position: fixed; inset: 0; z-index: 99;
+      background: rgba(7,8,12,.97); backdrop-filter: blur(20px);
+      flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Manrope', sans-serif; font-size: 1.6rem; font-weight: 700;
+      color: var(--text); text-decoration: none; transition: color .2s;
+    }
+    .mobile-menu a:hover { color: var(--red); }
+    .mobile-close {
+      position: absolute; top: 1.5rem; right: 1.5rem; font-size: 1.5rem;
+      background: none; border: none; color: var(--muted); cursor: pointer; padding: .5rem;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; display: flex; flex-direction: column; justify-content: center;
+      padding: 7rem 2rem 4rem; overflow: hidden;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 50%, rgba(220,38,38,.07) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(220,38,38,.04) 0%, transparent 55%),
+        radial-gradient(ellipse 100% 80% at 50% 0%, rgba(13,15,21,.9) 0%, transparent 70%),
+        linear-gradient(160deg, #07080C 0%, #0D0F18 50%, #07080C 100%);
+    }
+    /* Diagonal speed-lines background */
+    #hero::after {
+      content: '';
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image: repeating-linear-gradient(
+        -65deg,
+        transparent, transparent 120px,
+        rgba(255,255,255,.012) 120px, rgba(255,255,255,.012) 121px
+      );
+    }
+    .hero-inner { max-width: 1140px; margin: 0 auto; position: relative; z-index: 1; width: 100%; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1px solid rgba(220,38,38,.3); background: rgba(220,38,38,.08);
+      border-radius: 999px; padding: .35rem .9rem; font-size: .7rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase; color: var(--red); margin-bottom: 1.75rem;
+    }
+    .hero-badge::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--red); animation:blink 2s ease infinite; }
+    h1.hero-h1 {
+      font-size: clamp(2.6rem, 6vw, 5rem); font-weight: 900;
+      letter-spacing: -.03em; margin-bottom: 1.25rem; line-height: 1.05;
+    }
+    .hero-sub {
+      font-size: clamp(.95rem, 1.8vw, 1.15rem); color: var(--muted);
+      max-width: 520px; margin-bottom: 2.75rem; line-height: 1.7;
+    }
+    .hero-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; max-width: 580px; margin-bottom: 2.5rem; }
+    .hero-card {
+      background: var(--surf); border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem; cursor: pointer; text-decoration: none;
+      display: block; transition: background .25s, border-color .25s, transform .25s;
+    }
+    .hero-card:hover { background: var(--surf-h); border-color: rgba(220,38,38,.4); transform: translateY(-3px); }
+    .hero-card:hover .hc-arrow { transform: translateX(4px); color: var(--red); }
+    .hc-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: var(--red-dim); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+    }
+    .hc-icon svg { width: 20px; height: 20px; color: var(--red); stroke: currentColor; }
+    .hc-title { font-family: 'Manrope', sans-serif; font-weight: 800; font-size: 1rem; margin-bottom: .3rem; }
+    .hc-sub { font-size: .8rem; color: var(--muted); margin-bottom: 1rem; line-height: 1.5; }
+    .hc-arrow { font-size: .82rem; font-weight: 700; color: var(--red); display: flex; align-items: center; gap: .35rem; transition: transform .2s, color .2s; }
+    .hero-trust { display: flex; align-items: center; gap: 1.5rem; flex-wrap: wrap; }
+    .trust-item { display: flex; align-items: center; gap: .45rem; font-size: .8rem; color: var(--muted); }
+    .trust-item .stars { color: #FBBF24; letter-spacing: 1px; font-size: .75rem; }
+    .trust-sep { width: 1px; height: 18px; background: var(--border); }
+
+    /* ── STATS BAR ── */
+    #stats {
+      border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      background: var(--bg2); padding: 2.25rem 2rem;
+    }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; max-width: 1140px; margin: 0 auto; }
+    .stat-item { text-align: center; padding: 1rem; }
+    .stat-num { font-family: 'Manrope', sans-serif; font-size: 1.9rem; font-weight: 900; color: var(--red); letter-spacing: -.03em; margin-bottom: .2rem; }
+    .stat-lbl { font-size: .78rem; font-weight: 600; color: var(--muted); letter-spacing: .04em; text-transform: uppercase; }
+
+    /* ── SECTION COMMON ── */
+    .section-pad { padding: 6rem 2rem; }
+    .section-head { max-width: 640px; margin-bottom: 3.5rem; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; margin-bottom: .75rem; }
+    .section-head p { color: var(--muted); font-size: 1rem; line-height: 1.75; }
+
+    /* ── WHY DAYTONA ── */
+    #om { background: linear-gradient(180deg, var(--bg) 0%, var(--bg2) 50%, var(--bg) 100%); }
+    .om-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+    .om-card {
+      background: var(--surf); border: 1px solid var(--border); border-radius: 18px;
+      padding: 2rem; transition: background .25s, border-color .25s, transform .25s;
+    }
+    .om-card:hover { background: var(--surf-h); border-color: rgba(220,38,38,.35); transform: translateY(-4px); }
+    .om-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: var(--red-dim); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .om-icon svg { width: 24px; height: 24px; stroke: var(--red); }
+    .om-card h3 { font-size: 1.1rem; font-weight: 800; margin-bottom: .65rem; }
+    .om-card p { font-size: .88rem; color: var(--muted); line-height: 1.75; }
+
+    /* ── SELL STEPS ── */
+    #selg { background: var(--bg); }
+    .selg-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-bottom: 3rem; }
+    .selg-card {
+      background: var(--surf); border: 1px solid var(--border); border-radius: 18px;
+      padding: 2rem; position: relative; overflow: hidden;
+      transition: background .25s, border-color .25s, transform .25s;
+    }
+    .selg-card:hover { background: var(--surf-h); border-color: rgba(220,38,38,.3); transform: translateY(-3px); }
+    .selg-num {
+      font-family: 'Manrope', sans-serif; font-size: 4rem; font-weight: 900;
+      color: rgba(220,38,38,.1); position: absolute; top: 1rem; right: 1.25rem;
+      line-height: 1; letter-spacing: -.04em; pointer-events: none;
+    }
+    .selg-step-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      background: var(--red-dim); display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1.25rem;
+    }
+    .selg-step-icon svg { width: 22px; height: 22px; stroke: var(--red); }
+    .selg-card h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: .6rem; }
+    .selg-card p { font-size: .85rem; color: var(--muted); line-height: 1.75; }
+    .selg-cta { text-align: center; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: var(--red); color: #fff; font-family: 'Manrope', sans-serif;
+      font-weight: 700; font-size: .92rem; padding: .85rem 2.25rem; border-radius: 10px;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .2s, box-shadow .2s;
+    }
+    .btn-primary:hover { background: var(--red-h); transform: translateY(-2px); box-shadow: var(--red-glow); }
+    .btn-secondary {
+      display: inline-flex; align-items: center; gap: .6rem;
+      background: transparent; color: var(--text); font-family: 'Manrope', sans-serif;
+      font-weight: 600; font-size: .92rem; padding: .85rem 1.75rem; border-radius: 10px;
+      text-decoration: none; border: 1px solid var(--border);
+      transition: border-color .2s, background .2s, transform .2s;
+    }
+    .btn-secondary:hover { border-color: var(--border-h); background: var(--surf); transform: translateY(-2px); }
+    .btn-group { display: flex; gap: 1rem; align-items: center; flex-wrap: wrap; }
+
+    /* ── REVIEWS ── */
+    #anmeldelser { background: var(--bg2); padding: 6rem 2rem; overflow: hidden; }
+    .reviews-track-wrap { overflow: hidden; mask: linear-gradient(to right, transparent, #000 10%, #000 90%, transparent); }
+    .reviews-track {
+      display: flex; gap: 1.25rem;
+      animation: scroll-reviews 28s linear infinite;
+      width: max-content;
+    }
+    .reviews-track:hover { animation-play-state: paused; }
+    @keyframes scroll-reviews {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+    .review-card {
+      background: var(--surf); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.5rem 1.75rem; width: 300px; flex-shrink: 0;
+    }
+    .review-stars { color: #FBBF24; font-size: .85rem; margin-bottom: .75rem; letter-spacing: 2px; }
+    .review-text { font-size: .88rem; color: var(--muted); line-height: 1.7; margin-bottom: 1rem; font-style: italic; }
+    .review-author { font-size: .8rem; font-weight: 700; color: var(--text); }
+    .review-date { font-size: .72rem; color: var(--dim); margin-top: .15rem; }
+    .google-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .72rem; color: var(--muted); margin-top: .5rem;
+    }
+    .google-g {
+      width: 16px; height: 16px; border-radius: 3px;
+      background: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: .62rem; font-weight: 900; color: #DC2626;
+    }
+
+    /* ── COMMISSION ── */
+    #tjenester { background: var(--bg); padding: 6rem 2rem; }
+    .tjenester-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+    .tjenester-img {
+      border-radius: 20px; overflow: hidden; position: relative;
+      aspect-ratio: 4/3; background: var(--bg2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tjenester-img-inner {
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 60% 60% at 50% 50%, rgba(220,38,38,.15) 0%, transparent 70%),
+        linear-gradient(135deg, #0D0F18 0%, #12151F 100%);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .tj-icon-big { opacity: .15; }
+    .tj-icon-big svg { width: 120px; height: 120px; stroke: #DC2626; }
+    .tjenester-content h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; margin-bottom: 1rem; }
+    .tjenester-content p { color: var(--muted); font-size: .95rem; line-height: 1.8; margin-bottom: 1.5rem; }
+    .tj-perks { display: flex; flex-direction: column; gap: .75rem; margin-bottom: 2rem; }
+    .tj-perk { display: flex; align-items: flex-start; gap: .75rem; }
+    .tj-check { width: 20px; height: 20px; border-radius: 50%; background: var(--red-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+    .tj-check svg { width: 11px; height: 11px; stroke: var(--red); }
+    .tj-perk span { font-size: .88rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── CONTACT ── */
+    #kontakt {
+      background: linear-gradient(180deg, var(--bg2) 0%, var(--bg) 100%);
+      padding: 6rem 2rem;
+    }
+    .kontakt-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; }
+    .kontakt-form-wrap h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; margin-bottom: .6rem; }
+    .kontakt-form-wrap > p { color: var(--muted); font-size: .92rem; margin-bottom: 2rem; line-height: 1.7; }
+    .form-group { margin-bottom: 1.1rem; }
+    .form-group label { display: block; font-size: .78rem; font-weight: 600; color: var(--muted); margin-bottom: .45rem; letter-spacing: .04em; text-transform: uppercase; }
+    .form-group input, .form-group textarea, .form-group select {
+      width: 100%; background: var(--surf); border: 1px solid var(--border);
+      border-radius: 10px; padding: .8rem 1rem; color: var(--text);
+      font-family: 'DM Sans', sans-serif; font-size: .9rem;
+      transition: border-color .2s, background .2s; outline: none;
+    }
+    .form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+      border-color: var(--red); background: rgba(220,38,38,.04);
+    }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(139,142,158,.5); }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .form-submit { width: 100%; margin-top: .5rem; justify-content: center; font-size: .95rem; padding: .9rem; }
+    .kontakt-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .info-card {
+      background: var(--surf); border: 1px solid var(--border); border-radius: 16px;
+      padding: 1.5rem;
+    }
+    .info-card h3 { font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+    .info-row { display: flex; align-items: flex-start; gap: .75rem; margin-bottom: .9rem; }
+    .info-row:last-child { margin-bottom: 0; }
+    .info-ico { width: 34px; height: 34px; border-radius: 8px; background: var(--red-dim); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .info-ico svg { width: 16px; height: 16px; stroke: var(--red); }
+    .info-label { font-size: .72rem; color: var(--dim); font-weight: 600; letter-spacing: .03em; text-transform: uppercase; margin-bottom: .15rem; }
+    .info-val { font-size: .9rem; font-weight: 600; color: var(--text); }
+    .info-val a { color: var(--text); text-decoration: none; transition: color .2s; }
+    .info-val a:hover { color: var(--red); }
+    .hours-grid { display: grid; grid-template-columns: 1fr auto; gap: .4rem .75rem; }
+    .hours-day { font-size: .84rem; color: var(--muted); }
+    .hours-time { font-size: .84rem; font-weight: 600; color: var(--text); text-align: right; }
+    .hours-time.special { color: var(--red); }
+    .map-wrap {
+      border-radius: 14px; overflow: hidden; border: 1px solid var(--border);
+      height: 180px;
+    }
+    .map-wrap iframe { width: 100%; height: 100%; display: block; border: none; filter: invert(.9) hue-rotate(180deg) saturate(.4); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); background: var(--bg);
+      padding: 3rem 2rem 2rem;
+    }
+    .foot-inner { max-width: 1140px; margin: 0 auto; }
+    .foot-top { display: grid; grid-template-columns: 1.5fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); margin-bottom: 2rem; }
+    .foot-logo img { height: 38px; margin-bottom: 1rem; }
+    .foot-desc { font-size: .85rem; color: var(--muted); line-height: 1.75; max-width: 280px; }
+    .foot-col-title { font-family: 'Manrope', sans-serif; font-size: .78rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text); margin-bottom: 1rem; }
+    .foot-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .foot-links a { font-size: .85rem; color: var(--muted); text-decoration: none; transition: color .2s; }
+    .foot-links a:hover { color: var(--red); }
+    .foot-bottom { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+    .foot-copy { font-size: .78rem; color: var(--dim); }
+    .foot-legal { display: flex; gap: 1.5rem; }
+    .foot-legal a { font-size: .78rem; color: var(--dim); text-decoration: none; transition: color .2s; }
+    .foot-legal a:hover { color: var(--muted); }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .om-grid { grid-template-columns: 1fr 1fr; }
+      .tjenester-grid, .kontakt-grid { grid-template-columns: 1fr; }
+      .foot-top { grid-template-columns: 1fr 1fr; }
+      .tjenester-img { max-width: 500px; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-tel { display: none; }
+      .hamburger { display: flex; }
+      .hero-cards { grid-template-columns: 1fr 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .selg-grid { grid-template-columns: 1fr; }
+      .om-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      .hero-cards { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .foot-top { grid-template-columns: 1fr; }
+      .hero-trust { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      .trust-sep { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── MOBILE MENU ── -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a href="#" onclick="closeMobile()">Hjem</a>
+  <a href="#om" onclick="closeMobile()">Om oss</a>
+  <a href="#selg" onclick="closeMobile()">Selg bil</a>
+  <a href="#tjenester" onclick="closeMobile()">Kommisjonssalg</a>
+  <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+  <a href="tel:+4746255902" class="btn-primary" style="margin-top:1rem;">Ring oss</a>
+</div>
+
+<!-- ── NAV ── -->
+<nav id="nav">
+  <a href="#" class="nav-logo">
+    <img src="daytona-logo.png" alt="Daytona Bilsenter AS" />
+  </a>
+  <ul class="nav-links">
+    <li><a href="#om">Om oss</a></li>
+    <li><a href="#selg">Selg bil</a></li>
+    <li><a href="#tjenester">Kommisjonssalg</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:+4746255902" class="nav-tel">
+      <svg viewBox="0 0 24 24" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg>
+      46 25 59 02
+    </a>
+    <button class="hamburger" onclick="openMobile()" aria-label="Meny">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section id="hero">
+  <div class="hero-inner">
+    <div class="hero-badge rv">Bilforhandler i Drammen</div>
+    <h1 class="hero-h1 rv d1">
+      Kjøp og selg bil<br>i <span class="red">Drammen</span> —<br>trygt og direkte.
+    </h1>
+    <p class="hero-sub rv d2">
+      Hos Daytona Bilsenter handler du direkte med oss — ingen mellommann, ingen FINN-avgifter. Rask avklaring, full dokumentasjon og ærlig service.
+    </p>
+    <div class="hero-cards rv d3">
+      <a href="#kontakt" class="hero-card">
+        <div class="hc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="currentColor"/><rect x="9" y="11" width="14" height="10" rx="2" stroke="currentColor"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+        </div>
+        <div class="hc-title">Jeg vil kjøpe bil</div>
+        <div class="hc-sub">Se vårt utvalg av kvalitetssikrede biler</div>
+        <div class="hc-arrow">Se biler <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+      <a href="#selg" class="hero-card">
+        <div class="hc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4" stroke="currentColor"/></svg>
+        </div>
+        <div class="hc-title">Jeg vil selge bil</div>
+        <div class="hc-sub">Få konkret tilbud innen 24 timer</div>
+        <div class="hc-arrow">Få tilbud <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+      </a>
+    </div>
+    <div class="hero-trust rv d4">
+      <div class="trust-item">
+        <span class="stars">★★★★★</span>
+        <span>4.8 / 5 på Google</span>
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        57+ fornøyde kunder
+      </div>
+      <div class="trust-sep"></div>
+      <div class="trust-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        100% trygg handel
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── STATS ── -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item rv">
+      <div class="stat-num">4.8<span style="font-size:1.2rem;">/5</span></div>
+      <div class="stat-lbl">Google-vurdering</div>
+    </div>
+    <div class="stat-item rv d1">
+      <div class="stat-num">57+</div>
+      <div class="stat-lbl">Google-anmeldelser</div>
+    </div>
+    <div class="stat-item rv d2">
+      <div class="stat-num">100%</div>
+      <div class="stat-lbl">Trygg handel</div>
+    </div>
+    <div class="stat-item rv d3">
+      <div class="stat-num">24t</div>
+      <div class="stat-lbl">Til konkret tilbud</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── OM OSS ── -->
+<section id="om" class="section-pad">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="section-label">Hvorfor Daytona</div>
+      <h2>Bygget på tillit,<br>drevet av lidenskap.</h2>
+      <p>Vi er et lokalt bilsenter i Krokstadelva med et enkelt mål: gjøre kjøp og salg av bil enkelt, trygt og rettferdig for alle parter.</p>
+    </div>
+    <div class="om-grid">
+      <div class="om-card rv d1">
+        <div class="om-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"/><path d="M9 12l2 2 4-4" stroke="currentColor"/></svg>
+        </div>
+        <h3>Trygg handel</h3>
+        <p>Alle biler er kvalitetssikret og gjennomgått. Du får full dokumentasjon og garanti — ingen ubehagelige overraskelser i etterkant.</p>
+      </div>
+      <div class="om-card rv d2">
+        <div class="om-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"/></svg>
+        </div>
+        <h3>Direktekjøp uten mellommann</h3>
+        <p>Kjøp direkte fra oss og spar tid og penger. Ingen FINN-avgifter, ingen mellomleddsmargin — bare en ærlig pris.</p>
+      </div>
+      <div class="om-card rv d3">
+        <div class="om-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2" stroke="currentColor"/><circle cx="9" cy="7" r="4" stroke="currentColor"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75" stroke="currentColor"/></svg>
+        </div>
+        <h3>57 fornøyde kunder</h3>
+        <p>4.8 stjerner på Google og voksende. Lokal kunnskap, ærlig service og personlig oppfølging — kunden er alltid i fokus.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SELG BIL ── -->
+<section id="selg" class="section-pad" style="background:var(--bg2);">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="section-label">Selg bilen din</div>
+      <h2>Tre enkle steg.<br>Penger på konto.</h2>
+      <p>Fra registrering til utbetaling — vi gjør prosessen rask og smertefri. Du slipper bilder, annonser og utallige visninger.</p>
+    </div>
+    <div class="selg-grid">
+      <div class="selg-card rv d1">
+        <div class="selg-num">01</div>
+        <div class="selg-step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor"/><path d="M3 9h18M9 21V9" stroke="currentColor"/></svg>
+        </div>
+        <h3>Registrer bilen</h3>
+        <p>Oppgi reg.nr. og kilometerstand — vi henter all teknisk info automatisk. Ta noen bilder og send inn. Det tar 5 minutter.</p>
+      </div>
+      <div class="selg-card rv d2">
+        <div class="selg-num">02</div>
+        <div class="selg-step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor"/><polyline points="14,2 14,8 20,8" stroke="currentColor"/><line x1="16" y1="13" x2="8" y2="13" stroke="currentColor"/><line x1="16" y1="17" x2="8" y2="17" stroke="currentColor"/></svg>
+        </div>
+        <h3>Få konkret tilbud</h3>
+        <p>Vi gir deg et konkret tilbud innen 24 timer — ingen forpliktelse. Tilbudet er basert på markedspris og bilens faktiske stand.</p>
+      </div>
+      <div class="selg-card rv d3">
+        <div class="selg-num">03</div>
+        <div class="selg-step-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" stroke="currentColor"/><line x1="1" y1="10" x2="23" y2="10" stroke="currentColor"/></svg>
+        </div>
+        <h3>Få utbetalt</h3>
+        <p>Godtar du tilbudet, overtar vi papirarbeidet. Pengene er på konto innen få dager — helt uten stress.</p>
+      </div>
+    </div>
+    <div class="selg-cta rv d4">
+      <div class="btn-group" style="justify-content:center;">
+        <a href="#kontakt" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+          Start salget nå
+        </a>
+        <a href="tel:+4746255902" class="btn-secondary">Ring oss direkte</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── ANMELDELSER ── -->
+<section id="anmeldelser">
+  <div class="wrap" style="margin-bottom:2.5rem;">
+    <div class="section-head rv" style="margin-bottom:0;">
+      <div class="section-label">Kundeanmeldelser</div>
+      <h2>Hva kundene våre sier.</h2>
+    </div>
+  </div>
+  <div class="reviews-track-wrap rv d1">
+    <div class="reviews-track" id="reviewsTrack">
+      <!-- Set 1 -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Solgte bilen min på to dager. Utrolig rask og profesjonell service — de tok hånd om alt papirarbeidet."</div>
+        <div class="review-author">Kristoffer H.</div>
+        <div class="review-date">Januar 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Kjøpte min første bruktbil her. Fikk grundig gjennomgang av bilen og full garanti. Trygg handel fra start til slutt!"</div>
+        <div class="review-author">Marte S.</div>
+        <div class="review-date">Februar 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Seriøse og ærlige folk. Fikk god pris for bilen min uten masse tull og forhandlinger. Anbefaler på det sterkeste."</div>
+        <div class="review-author">Thomas B.</div>
+        <div class="review-date">Mars 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Ringte om morgenen, hadde tilbud samme ettermiddag. Penger på konto tre dager etter. Kan ikke be om mer!"</div>
+        <div class="review-author">Ingrid K.</div>
+        <div class="review-date">April 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Veldig hyggelig og personlig service. Følte meg ivaretatt gjennom hele prosessen. Vil definitivt komme tilbake."</div>
+        <div class="review-author">Anders M.</div>
+        <div class="review-date">April 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Byttet inn bilen og kjøpte ny av dem. Smidig prosess og god pris på innbytte. Lokalt og pålitelig."</div>
+        <div class="review-author">Silje R.</div>
+        <div class="review-date">Mai 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <!-- Duplicate for seamless loop -->
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Solgte bilen min på to dager. Utrolig rask og profesjonell service — de tok hånd om alt papirarbeidet."</div>
+        <div class="review-author">Kristoffer H.</div>
+        <div class="review-date">Januar 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Kjøpte min første bruktbil her. Fikk grundig gjennomgang av bilen og full garanti. Trygg handel fra start til slutt!"</div>
+        <div class="review-author">Marte S.</div>
+        <div class="review-date">Februar 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Seriøse og ærlige folk. Fikk god pris for bilen min uten masse tull og forhandlinger. Anbefaler på det sterkeste."</div>
+        <div class="review-author">Thomas B.</div>
+        <div class="review-date">Mars 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Ringte om morgenen, hadde tilbud samme ettermiddag. Penger på konto tre dager etter. Kan ikke be om mer!"</div>
+        <div class="review-author">Ingrid K.</div>
+        <div class="review-date">April 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Veldig hyggelig og personlig service. Følte meg ivaretatt gjennom hele prosessen. Vil definitivt komme tilbake."</div>
+        <div class="review-author">Anders M.</div>
+        <div class="review-date">April 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <div class="review-text">"Byttet inn bilen og kjøpte ny av dem. Smidig prosess og god pris på innbytte. Lokalt og pålitelig."</div>
+        <div class="review-author">Silje R.</div>
+        <div class="review-date">Mai 2025</div>
+        <div class="google-badge"><div class="google-g">G</div> Google-anmeldelse</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KOMMISJONSSALG ── -->
+<section id="tjenester" class="section-pad">
+  <div class="wrap">
+    <div class="tjenester-grid">
+      <div class="tjenester-img rv">
+        <div class="tjenester-img-inner">
+          <div class="tj-icon-big">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h11a2 2 0 012 2v3" stroke="currentColor"/><rect x="9" y="11" width="14" height="10" rx="2" stroke="currentColor"/><circle cx="12" cy="16" r="1" fill="currentColor"/></svg>
+          </div>
+        </div>
+      </div>
+      <div class="tjenester-content rv d2">
+        <div class="section-label">Tjeneste</div>
+        <h2>Kommisjonssalg — vi selger for deg.</h2>
+        <p>Vil du ha en høyere pris enn innbyttepris, men uten stresset med å selge selv? Med kommisjonssalg hos Daytona tar vi oss av alt — fra visning til kontrakt.</p>
+        <div class="tj-perks">
+          <div class="tj-perk">
+            <div class="tj-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5" stroke="currentColor"/></svg></div>
+            <span>Vi annonserer og håndterer alle visninger for deg</span>
+          </div>
+          <div class="tj-perk">
+            <div class="tj-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5" stroke="currentColor"/></svg></div>
+            <span>Trygg betalingsordning — vi mottar betaling før overlevering</span>
+          </div>
+          <div class="tj-perk">
+            <div class="tj-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5" stroke="currentColor"/></svg></div>
+            <span>Du setter prisen — vi tar en fast kommisjon</span>
+          </div>
+          <div class="tj-perk">
+            <div class="tj-check"><svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round"><path d="M20 6L9 17l-5-5" stroke="currentColor"/></svg></div>
+            <span>Bilen kan stå hos oss eller du beholder den inntil salg</span>
+          </div>
+        </div>
+        <a href="#kontakt" class="btn-primary">
+          Spør om kommisjonssalg
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── KONTAKT ── -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="section-head rv">
+      <div class="section-label">Ta kontakt</div>
+      <h2>La oss hjelpe deg.</h2>
+    </div>
+    <div class="kontakt-grid">
+      <!-- Form -->
+      <div class="kontakt-form-wrap rv d1">
+        <h2>Send oss en melding</h2>
+        <p>Fyll inn skjemaet, så tar vi kontakt med deg innen samme dag.</p>
+        <form onsubmit="sendForm(event)">
+          <div class="form-row">
+            <div class="form-group">
+              <label>Fornavn</label>
+              <input type="text" id="f-name" placeholder="Ola" required />
+            </div>
+            <div class="form-group">
+              <label>Etternavn</label>
+              <input type="text" id="f-lastname" placeholder="Nordmann" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="tel" id="f-tel" placeholder="+47 xxx xx xxx" required />
+          </div>
+          <div class="form-group">
+            <label>E-post</label>
+            <input type="email" id="f-email" placeholder="ola@eksempel.no" />
+          </div>
+          <div class="form-group">
+            <label>Hva gjelder henvendelsen?</label>
+            <select id="f-type">
+              <option value="kjøp">Kjøpe bil</option>
+              <option value="salg">Selge bil</option>
+              <option value="kommisjon">Kommisjonssalg</option>
+              <option value="annet">Annet</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Melding</label>
+            <textarea id="f-msg" placeholder="Beskriv hva du lurer på..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Send melding
+          </button>
+          <div id="f-success" style="display:none;margin-top:1rem;padding:.9rem;background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);border-radius:10px;color:#4ADE80;font-size:.85rem;text-align:center;font-weight:600;">
+            ✓ Melding sendt! Vi tar kontakt innen dagen.
+          </div>
+        </form>
+      </div>
+
+      <!-- Info -->
+      <div class="kontakt-info rv d2">
+        <div class="info-card">
+          <h3>Kontaktinformasjon</h3>
+          <div class="info-row">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="info-label">Telefon</div>
+              <div class="info-val"><a href="tel:+4746255902">+47 46 25 59 02</a></div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="info-label">E-post</div>
+              <div class="info-val"><a href="mailto:post@daytonabilsenter.no">post@daytonabilsenter.no</a></div>
+            </div>
+          </div>
+          <div class="info-row">
+            <div class="info-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor"/><circle cx="12" cy="10" r="3" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="info-label">Adresse</div>
+              <div class="info-val">Spikerveien 7A, 3055 Krokstadelva</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <h3>Åpningstider</h3>
+          <div class="hours-grid">
+            <div class="hours-day">Mandag – Fredag</div>
+            <div class="hours-time">10:00 – 19:00</div>
+            <div class="hours-day">Lørdag</div>
+            <div class="hours-time">10:00 – 17:00</div>
+            <div class="hours-day">Søndag</div>
+            <div class="hours-time special">Etter avtale</div>
+          </div>
+        </div>
+
+        <div class="map-wrap">
+          <iframe
+            src="https://maps.google.com/maps?q=Spikerveien+7A,+3055+Krokstadelva,+Norway&output=embed"
+            loading="lazy"
+            allowfullscreen
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Kart til Daytona Bilsenter AS">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <div class="foot-logo"><img src="daytona-logo.png" alt="Daytona Bilsenter AS" /></div>
+        <p class="foot-desc">Din lokale bilforhandler i Krokstadelva. Kjøp og selg bil trygt og direkte — uten mellommann.</p>
+      </div>
+      <div>
+        <div class="foot-col-title">Navigasjon</div>
+        <ul class="foot-links">
+          <li><a href="#om">Om oss</a></li>
+          <li><a href="#selg">Selg bil</a></li>
+          <li><a href="#tjenester">Kommisjonssalg</a></li>
+          <li><a href="#kontakt">Kontakt</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-title">Kontakt</div>
+        <ul class="foot-links">
+          <li><a href="tel:+4746255902">+47 46 25 59 02</a></li>
+          <li><a href="mailto:post@daytonabilsenter.no">post@daytonabilsenter.no</a></li>
+          <li><a href="#kontakt">Spikerveien 7A, Krokstadelva</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <p class="foot-copy">© 2026 Daytona Bilsenter AS — Org. nr. Krokstadelva, Drammen</p>
+      <div class="foot-legal">
+        <a href="#">Personvern</a>
+        <a href="#">Vilkår</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ── Nav scroll ── */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 30);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  /* ── Scroll reveal ── */
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  /* ── Contact form ── */
+  function sendForm(e) {
+    e.preventDefault();
+    const name = document.getElementById('f-name').value;
+    const last = document.getElementById('f-lastname').value;
+    const tel = document.getElementById('f-tel').value;
+    const email = document.getElementById('f-email').value;
+    const type = document.getElementById('f-type').value;
+    const msg = document.getElementById('f-msg').value;
+    const body = encodeURIComponent(
+      `Navn: ${name} ${last}\nTelefon: ${tel}\nE-post: ${email}\nGjelder: ${type}\n\nMelding:\n${msg}`
+    );
+    window.location.href = `mailto:post@daytonabilsenter.no?subject=Henvendelse fra nettside&body=${body}`;
+    document.getElementById('f-success').style.display = 'block';
+    e.target.reset();
+  }
+
+  /* ── Smooth nav link clicks on mobile ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+        closeMobile();
+      }
+    });
+  });
+</script>
+</body>
+</html>
