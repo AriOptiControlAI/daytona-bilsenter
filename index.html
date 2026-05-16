@@ -381,23 +381,98 @@
       .om-grid { grid-template-columns: 1fr 1fr; }
       .tjenester-grid, .kontakt-grid { grid-template-columns: 1fr; }
       .foot-top { grid-template-columns: 1fr 1fr; }
-      .tjenester-img { max-width: 500px; }
+      .tjenester-img { max-width: 560px; }
+      .section-pad { padding: 5rem 2rem; }
     }
+
     @media (max-width: 768px) {
+      /* Nav */
       .nav-links, .nav-tel { display: none; }
       .hamburger { display: flex; }
-      .hero-cards { grid-template-columns: 1fr 1fr; }
+      .nav-logo img { height: 64px; }
+      nav { padding: .75rem 1.25rem; }
+      nav.scrolled { padding: .6rem 1.25rem; }
+
+      /* Hero */
+      #hero { padding: 7rem 1.5rem 3.5rem; }
+      .hero-trust-top { font-size: .75rem; }
+      .hero-cards { grid-template-columns: 1fr 1fr; gap: .75rem; max-width: 100%; }
+      .hero-trust { justify-content: flex-start; }
+
+      /* Stats */
       .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-num { font-size: 1.6rem; }
+
+      /* Sections */
+      .section-pad { padding: 4rem 1.5rem; }
       .selg-grid { grid-template-columns: 1fr; }
       .om-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
+
+      /* Kontakt */
+      .kontakt-grid { gap: 2rem; }
+
+      /* Footer */
+      .foot-top { grid-template-columns: 1fr 1fr; gap: 2rem; }
+      .foot-logo img { height: 52px; }
+      .foot-top > div:first-child { grid-column: 1 / -1; }
+
+      /* Btn group stacking */
+      .btn-group { flex-direction: column; align-items: stretch; }
+      .btn-group .btn-primary, .btn-group .btn-secondary { text-align: center; justify-content: center; }
     }
+
     @media (max-width: 540px) {
-      .hero-cards { grid-template-columns: 1fr; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .foot-top { grid-template-columns: 1fr; }
-      .hero-trust { flex-direction: column; align-items: flex-start; gap: .75rem; }
+      /* Nav */
+      .nav-logo img { height: 52px; }
+
+      /* Hero */
+      #hero { padding: 6.5rem 1.25rem 3rem; }
+      .hero-cards { grid-template-columns: 1fr; max-width: 100%; }
+      .hero-trust { flex-direction: column; align-items: center; gap: .65rem; }
       .trust-sep { display: none; }
+      .hero-trust-top { font-size: .72rem; padding: .4rem .85rem; }
+
+      /* Stats */
+      .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 0; }
+      .stat-item { padding: .85rem .5rem; border: 1px solid var(--border); }
+      .stat-num { font-size: 1.5rem; }
+      .stat-lbl { font-size: .68rem; }
+
+      /* Sections */
+      .section-pad { padding: 3.5rem 1.25rem; }
+      .section-head { margin-bottom: 2.5rem; }
+      #biler { padding: 3.5rem 1.25rem; }
+
+      /* Cards */
+      .om-card, .selg-card { padding: 1.5rem; }
+      .selg-num { font-size: 3rem; }
+
+      /* Tjenester */
+      .tjenester-grid { gap: 2rem; }
+      .tjenester-content h2 { font-size: 1.6rem; }
+
+      /* Kontakt */
+      .kontakt-form-wrap h2 { font-size: 1.5rem; }
+      .map-wrap { height: 160px; }
+
+      /* Footer */
+      .foot-top { grid-template-columns: 1fr; gap: 1.75rem; }
+      .foot-top > div:first-child { grid-column: auto; }
+      .foot-bottom { flex-direction: column; align-items: flex-start; gap: .65rem; }
+      footer { padding: 2.5rem 1.25rem 1.5rem; }
+
+      /* Chat */
+      #chat-btn { bottom: 1rem; right: 1rem; width: 52px; height: 52px; }
+      #chat-window { right: .75rem; bottom: 4.5rem; }
+    }
+
+    @media (max-width: 380px) {
+      .nav-logo img { height: 44px; }
+      #hero { padding: 6rem 1rem 2.5rem; }
+      .hero-cards { gap: .6rem; }
+      .hc-title { font-size: .95rem; }
+      .section-pad { padding: 3rem 1rem; }
     }
   </style>
 </head>
@@ -883,7 +958,7 @@
       </div>
     </div>
     <div class="foot-bottom">
-      <p class="foot-copy">© 2026 Daytona Bilsenter AS — Org. nr. Krokstadelva, Drammen</p>
+      <p class="foot-copy">© 2026 Daytona Bilsenter AS &nbsp;·&nbsp; Org. nr. 833 435 582</p>
       <div class="foot-legal">
         <a href="#">Personvern</a>
         <a href="#">Vilkår</a>
