@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Vilkår og betingelser — Daytona Bilsenter AS</title>
+  <meta name="description" content="Les Daytona Bilsenter sine vilkår og betingelser for kjøp, salg og bruk av tjenestene våre."/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="daytona-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#DC2626;--bg:#07080C;--bg2:#0D0F15;--surf:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--text:#F0F2F8;--muted:#8B8E9E;--dim:rgba(240,242,248,.3)}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;min-height:100vh}
+    h1,h2,h3{font-family:'Manrope',sans-serif;letter-spacing:-.02em}
+    nav{position:sticky;top:0;z-index:100;background:rgba(7,8,12,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo img{height:52px;width:auto;display:block}
+    .nav-back{font-size:.82rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s;font-weight:600}
+    .nav-back:hover{color:var(--red)}
+    main{max-width:760px;margin:0 auto;padding:4rem 2rem 6rem}
+    .page-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.45rem}
+    .page-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+    h1{font-size:clamp(1.8rem,4vw,2.75rem);font-weight:900;margin-bottom:.5rem}
+    .updated{font-size:.8rem;color:var(--dim);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+    .section{margin-bottom:2.5rem}
+    .section h2{font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+    .section h2::before{content:attr(data-num);font-size:.65rem;font-weight:800;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);border-radius:4px;padding:.15rem .45rem;color:var(--red);flex-shrink:0}
+    .section p{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:.75rem}
+    .section ul{list-style:none;padding:0}
+    .section ul li{color:var(--muted);font-size:.9rem;padding:.3rem 0 .3rem 1.1rem;position:relative}
+    .section ul li::before{content:'›';position:absolute;left:0;color:var(--red);font-weight:700}
+    .contact-box{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-top:.75rem;display:flex;align-items:center;gap:.75rem}
+    .contact-box a{color:var(--red);text-decoration:none;font-size:.9rem;font-weight:700}
+    .contact-box a:hover{text-decoration:underline}
+    footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
+    footer a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s}
+    footer a:hover{color:var(--red)}
+    .sep{color:var(--border);margin:0 .75rem}
+    @media(max-width:600px){main{padding:2.5rem 1.25rem 4rem}h1{font-size:1.5rem}nav{padding:.75rem 1.25rem}.nav-logo img{height:42px}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo"><img src="daytona-logo.png" alt="Daytona Bilsenter AS"/></a>
+  <a href="/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Tilbake til forsiden
+  </a>
+</nav>
+<main>
+  <div class="page-label">Juridisk</div>
+  <h1>Vilkår og betingelser</h1>
+  <div class="updated">Sist oppdatert: <span id="dato"></span></div>
+
+  <div class="section">
+    <h2 data-num="01">Aksept av vilkår</h2>
+    <p>Ved å bruke Daytona Bilsenter AS sine tjenester eller ta kontakt med oss, aksepterer du disse vilkårene. Hvis du ikke godtar vilkårene, ber vi deg om å ikke benytte tjenestene.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="02">Tjenestebeskrivelse</h2>
+    <p>Daytona Bilsenter AS tilbyr følgende tjenester:</p>
+    <ul>
+      <li>Kjøp og salg av brukte kjøretøy</li>
+      <li>Innbytte av bil mot annen bil</li>
+      <li>Kommisjonssalg — vi selger bilen din på dine vegne</li>
+      <li>Verdivurdering av kjøretøy</li>
+    </ul>
+    <p>Vi forbeholder oss retten til å endre, avvise eller avslutte tjenester uten forutgående varsel.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="03">Kjøp og salg av kjøretøy</h2>
+    <p>Alle biler vi selger er gjennomgått og kvalitetssikret. Vi tilbyr full dokumentasjon og garanti i henhold til gjeldende lover. Kjøpers angrerett gjelder ikke ved kjøp av kjøretøy mellom privatpersoner og næringsdrivende, med mindre annet er avtalt skriftlig.</p>
+    <p>Prisene som vises er veiledende og kan endres. Endelig pris avtales ved kjøpsavtale.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="04">Kommisjonssalg</h2>
+    <p>Ved kommisjonssalg selger Daytona Bilsenter AS bilen på kundens vegne mot en fast kommisjon. Vilkårene for kommisjonssalg avtales individuelt og bekreftes skriftlig. Kunden har ansvar for at bilen er i den stand som oppgis ved innlevering.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="05">Betaling</h2>
+    <p>Betaling for kjøretøy skjer i henhold til den kjøpsavtalen som inngås mellom partene. Vi aksepterer bankoverføring og andre betalingsmåter som avtales i hvert enkelt tilfelle. Alle priser er inkludert MVA der dette er aktuelt.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="06">Ansvarsbegrensning</h2>
+    <p>Daytona Bilsenter AS er ikke ansvarlig for indirekte tap eller følgeskader som følge av bruk av tjenestene. Vårt ansvar er begrenset til det direkte tapet, og maksimalt til kjøpesummen for det aktuelle kjøretøyet.</p>
+    <p>Vi er heller ikke ansvarlige for skader som skyldes feil bruk, ulykker eller slitasje etter overlevering.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="07">Immaterielle rettigheter</h2>
+    <p>Alt innhold på denne nettsiden — inkludert logo, tekst, bilder og design — eies av Daytona Bilsenter AS og er beskyttet av norsk opphavsrettslovgivning. Innholdet må ikke kopieres eller brukes uten skriftlig tillatelse.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="08">Reklamasjon og garanti</h2>
+    <p>Reklamasjonsrett følger forbrukerkjøpsloven og kjøpsloven. Ved mangler ved kjøretøyet som ikke er opplyst om ved kjøp, ber vi deg ta kontakt med oss snarest mulig. Vi ønsker å løse eventuelle uenigheter i minnelighet.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="09">Gjeldende lov</h2>
+    <p>Disse vilkårene reguleres av norsk lov. Eventuelle tvister som ikke løses i minnelighet, skal behandles av norske domstoler med Drammen tingrett som verneting.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="10">Kontakt</h2>
+    <p>Spørsmål om vilkårene? Ta kontakt med oss:</p>
+    <div class="contact-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:post@daytonabilsenter.no">post@daytonabilsenter.no</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <a href="/">Forsiden</a>
+  <span class="sep">·</span>
+  <a href="/personvern.html">Personvernerklæring</a>
+  <span class="sep">·</span>
+  <span style="color:var(--dim);font-size:.82rem;">© 2026 Daytona Bilsenter AS · Org. nr. 833 435 582</span>
+</footer>
+<script>
+  const d = new Date();
+  document.getElementById('dato').textContent = d.toLocaleDateString('nb-NO',{day:'numeric',month:'long',year:'numeric'});
+</script>
+</body>
+</html>

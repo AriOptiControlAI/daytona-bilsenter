@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Personvernerklæring — Daytona Bilsenter AS</title>
+  <meta name="description" content="Les Daytona Bilsenter sin personvernerklæring og hvordan vi behandler dine personopplysninger."/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="icon" type="image/png" href="daytona-logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{--red:#DC2626;--bg:#07080C;--bg2:#0D0F15;--surf:rgba(255,255,255,.04);--border:rgba(255,255,255,.08);--text:#F0F2F8;--muted:#8B8E9E;--dim:rgba(240,242,248,.3)}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;line-height:1.7;min-height:100vh}
+    h1,h2,h3{font-family:'Manrope',sans-serif;letter-spacing:-.02em}
+    nav{position:sticky;top:0;z-index:100;background:rgba(7,8,12,.92);border-bottom:1px solid var(--border);backdrop-filter:blur(16px);padding:.85rem 2rem;display:flex;align-items:center;justify-content:space-between}
+    .nav-logo img{height:52px;width:auto;display:block}
+    .nav-back{font-size:.82rem;color:var(--muted);text-decoration:none;display:flex;align-items:center;gap:.4rem;transition:color .2s;font-weight:600}
+    .nav-back:hover{color:var(--red)}
+    main{max-width:760px;margin:0 auto;padding:4rem 2rem 6rem}
+    .page-label{font-size:.68rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--red);margin-bottom:.9rem;display:flex;align-items:center;gap:.45rem}
+    .page-label::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--red);flex-shrink:0}
+    h1{font-size:clamp(1.8rem,4vw,2.75rem);font-weight:900;margin-bottom:.5rem}
+    .updated{font-size:.8rem;color:var(--dim);margin-bottom:3rem;padding-bottom:2rem;border-bottom:1px solid var(--border)}
+    .section{margin-bottom:2.5rem}
+    .section h2{font-size:1rem;font-weight:800;color:var(--red);margin-bottom:.75rem;display:flex;align-items:center;gap:.6rem}
+    .section h2::before{content:attr(data-num);font-size:.65rem;font-weight:800;background:rgba(220,38,38,.1);border:1px solid rgba(220,38,38,.2);border-radius:4px;padding:.15rem .45rem;color:var(--red);flex-shrink:0}
+    .section p{color:var(--muted);font-size:.9rem;line-height:1.8;margin-bottom:.75rem}
+    .section ul{list-style:none;padding:0}
+    .section ul li{color:var(--muted);font-size:.9rem;padding:.3rem 0 .3rem 1.1rem;position:relative}
+    .section ul li::before{content:'›';position:absolute;left:0;color:var(--red);font-weight:700}
+    .gdpr-grid{display:grid;grid-template-columns:1fr 1fr;gap:.65rem;margin-top:.75rem}
+    .gdpr-item{background:var(--surf);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;font-size:.83rem;color:var(--muted);display:flex;align-items:flex-start;gap:.5rem}
+    .gdpr-item::before{content:'✓';color:var(--red);font-weight:700;flex-shrink:0}
+    .contact-box{background:var(--surf);border:1px solid var(--border);border-radius:10px;padding:1.2rem 1.5rem;margin-top:.75rem;display:flex;align-items:center;gap:.75rem}
+    .contact-box a{color:var(--red);text-decoration:none;font-size:.9rem;font-weight:700}
+    .contact-box a:hover{text-decoration:underline}
+    footer{border-top:1px solid var(--border);padding:2rem;text-align:center}
+    footer a{color:var(--muted);text-decoration:none;font-size:.82rem;transition:color .2s}
+    footer a:hover{color:var(--red)}
+    .sep{color:var(--border);margin:0 .75rem}
+    @media(max-width:600px){main{padding:2.5rem 1.25rem 4rem}h1{font-size:1.5rem}.gdpr-grid{grid-template-columns:1fr}nav{padding:.75rem 1.25rem}.nav-logo img{height:42px}}
+  </style>
+</head>
+<body>
+<nav>
+  <a href="/" class="nav-logo"><img src="daytona-logo.png" alt="Daytona Bilsenter AS"/></a>
+  <a href="/" class="nav-back">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+    Tilbake til forsiden
+  </a>
+</nav>
+<main>
+  <div class="page-label">Juridisk</div>
+  <h1>Personvernerklæring</h1>
+  <div class="updated">Sist oppdatert: <span id="dato"></span></div>
+
+  <div class="section">
+    <h2 data-num="01">Innledning</h2>
+    <p>Daytona Bilsenter AS tar personvernet ditt på alvor. Denne personvernerklæringen forklarer hvordan vi samler inn, bruker og beskytter dine personopplysninger i forbindelse med kjøp, salg og annen kontakt med oss.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="02">Hvem er vi</h2>
+    <p>Behandlingsansvarlig for personopplysninger er:</p>
+    <ul>
+      <li>Daytona Bilsenter AS</li>
+      <li>Spikerveien 7A, 3055 Krokstadelva</li>
+      <li>Org. nr. 833 435 582</li>
+      <li>E-post: post@daytonabilsenter.no</li>
+      <li>Telefon: +47 46 25 59 02</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 data-num="03">Informasjon vi samler inn</h2>
+    <p>Vi samler inn følgende typer informasjon:</p>
+    <ul>
+      <li>Kontaktinformasjon (navn, e-post, telefon)</li>
+      <li>Kjøretøyinformasjon (registreringsnummer, kilometerstand)</li>
+      <li>Teknisk informasjon (IP-adresse, nettlesertype) ved bruk av nettsiden</li>
+      <li>Meldinger og henvendelser du sender oss</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 data-num="04">Hvordan vi bruker informasjonen</h2>
+    <p>Vi bruker informasjonen din til å:</p>
+    <ul>
+      <li>Behandle og besvare henvendelser om kjøp og salg av bil</li>
+      <li>Gi deg prisoverslag og tilbud</li>
+      <li>Gjennomføre og dokumentere kjøpsavtaler</li>
+      <li>Overholde juridiske forpliktelser</li>
+      <li>Forbedre nettsiden vår</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 data-num="05">Deling av informasjon</h2>
+    <p>Vi deler ikke dine personopplysninger med tredjeparter uten ditt samtykke, unntatt når det er nødvendig for å gjennomføre en avtale (f.eks. vegvesenets registrering ved kjøp/salg av kjøretøy) eller når loven krever det.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="06">Lagring og sikkerhet</h2>
+    <p>Personopplysninger lagres ikke lenger enn det som er nødvendig for formålet de ble samlet inn for. Vi bruker rimelige tekniske og organisatoriske tiltak for å beskytte dine opplysninger mot uautorisert tilgang.</p>
+  </div>
+
+  <div class="section">
+    <h2 data-num="07">Dine rettigheter (GDPR)</h2>
+    <p>I henhold til personvernforordningen (GDPR) har du rett til å:</p>
+    <div class="gdpr-grid">
+      <div class="gdpr-item">Få innsyn i dine personopplysninger</div>
+      <div class="gdpr-item">Rette uriktige opplysninger</div>
+      <div class="gdpr-item">Slette dine opplysninger</div>
+      <div class="gdpr-item">Trekke tilbake samtykke</div>
+      <div class="gdpr-item">Begrense behandlingen</div>
+      <div class="gdpr-item">Klage til Datatilsynet</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2 data-num="08">Kontakt oss</h2>
+    <p>Har du spørsmål om personvern eller ønsker å utøve dine rettigheter? Ta kontakt:</p>
+    <div class="contact-box">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#DC2626" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <a href="mailto:post@daytonabilsenter.no">post@daytonabilsenter.no</a>
+    </div>
+  </div>
+</main>
+<footer>
+  <a href="/">Forsiden</a>
+  <span class="sep">·</span>
+  <a href="/vilkar.html">Vilkår og betingelser</a>
+  <span class="sep">·</span>
+  <span style="color:var(--dim);font-size:.82rem;">© 2026 Daytona Bilsenter AS</span>
+</footer>
+<script>
+  const d = new Date();
+  document.getElementById('dato').textContent = d.toLocaleDateString('nb-NO',{day:'numeric',month:'long',year:'numeric'});
+</script>
+</body>
+</html>
